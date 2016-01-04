@@ -8,7 +8,9 @@
 
 ## Package
 
-- 
+- npm install electron-packager -g
+- electron-packager . 4YB --platform=win32 --arch=x64 --version=0.36.0
+- http://www.jrsoftware.org/isdl.php (to build a single setup exe file)
 
 ## Running the app
 - cd ~/4yb
