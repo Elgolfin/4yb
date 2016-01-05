@@ -12,6 +12,13 @@
 - electron-packager . 4YB --platform=win32 --arch=x64 --version=0.36.0
 - http://www.jrsoftware.org/isdl.php (to build a single setup exe file)
 
+To to:
+- http://blog.atom.io/2015/11/05/electron-updates-mac-app-store-and-windows-auto-updater.html
+- Explore https://github.com/Squirrel/Squirrel.Windows
+
 ## Running the app
 - cd ~/4yb
 - electron main.js
+
+Or
+- Run the 4YB exe if you installed from the package
