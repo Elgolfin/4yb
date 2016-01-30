@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<head>
+  
+        <title>4YB - For Your Budget</title>
+        <meta charset="utf-8">
+        
+        <!-- Mobile meta -->
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Form styleshets -->
+        
+        <link rel="stylesheet" type="text/css"  href="./css/smart-forms.css">
+		<link rel="stylesheet" type="text/css"  href="./css/smart-themes/black.css">
+        <link rel="stylesheet" type="text/css"  href="./css/font-awesome.min.css">
+       
+</head>
+
+    <body>
+	 
+        <div class="smart-wrap theme-black">
+        	<div class="smart-forms smart-container wrap-1">
+            
+              <div class="form-header header-primary header-black">
+                	<h4><i class="fa fa-new"></i>Add an Account</h4>
+              </div><!-- end .form-header section -->
+                
+                <form method="post" action="/" id="contact">
+                	<div class="form-body">
+                    
+                     <!-- OUR FORM ELEMENTS WILL GO HERE -->                                                
+                    
+					<div class="frm-row">					
+						<div class="section colm colm9">
+							<label for="account-name" class="field-label">Account name</label>
+							<label class="field">
+								<input type="text" name="account-name" class="gui-input" placeholder="Enter account name">
+							</label>
+						</div><!-- end section -->
+						
+						<div class="section colm colm3">
+							<label for="account-code" class="field-label">Account code</label>
+							<label class="field">
+								<input type="text" name="account-code" class="gui-input" placeholder="Enter account code">
+							</label>
+						</div><!-- end section -->
+					 </div> 
+					
+					<div class="frm-row">
+						<div class="section colm colm4">
+							<label class="field select">
+								<select id="country" name="country">
+									<option value="">Account type </option>
+									<option value="EX">Expense</option>
+									<option value="IN">Income</option>
+								</select>
+								<i class="arrow"></i>                    
+							</label>  
+						</div><!-- end section -->
+					
+						<div class="section colm colm8">
+							<label class="field select">
+								<select id="parent" name="parent">
+									<option value="">Parent account</option>
+									<option value="ac-1">Account 1</option>
+									<option value="ac-2">Account 2</option>
+								</select>
+								<i class="arrow"></i>                    
+							</label>  
+						</div><!-- end section -->
+					</div>
+					 
+					<div class="section">
+						<label for="account-desc" class="field-label">Account description</label>
+						<label class="field">
+							<textarea class="gui-textarea" name="account-desc" id="account-desc" placeholder="Enter account description"></textarea>   
+						</label>
+					</div><!-- end section --> 
+					
+					
+					
+					<div class="section">
+						<div class="option-group field">
+						
+							<label class="switch">
+								<input type="checkbox" name="switch1" id="switch1" value="switch1">
+								<span class="switch-label" data-on="ON" data-off="OFF"></span>
+								<span> Active </span>
+							</label>
+												
+							<label class="switch">
+								<input type="checkbox" name="switch2" id="switch2" value="switch2">
+								<span class="switch-label" data-on="ON" data-off="OFF"></span>
+								<span> Placeholder </span>
+							</label>
+												
+							<label class="switch">
+								<input type="checkbox" name="switch2" id="switch2" value="switch2">
+								<span class="switch-label" data-on="ON" data-off="OFF"></span>
+								<span> Hidden </span>
+							</label>
+									
+						</div><!-- end .option-group section -->
+					</div><!-- end section -->
+					 
+					 
+                    </div><!-- end .form-body section -->
+                    <div class="form-footer">
+                    	<button type="submit" class="button btn-primary btn-black">Create Account</button>
+                    </div><!-- end .form-footer section -->
+                    
+                </form>
+                
+            </div><!-- end .smart-forms section -->
+        </div><!-- end .smart-wrap section -->
+     
+	 
+    We are using node <script>document.write(process.versions.node)</script>,
+    Chrome <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+	 
+    </body>
+</html>
