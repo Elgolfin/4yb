@@ -10,36 +10,13 @@
 
 <a href="app.html">Home</a>
 
-<!-- item template -->
-<script type="text/x-template" id="item-template">
-  <li>
-    <div
-      :class="{bold: isFolder}"
-      @click="toggle"
-      @dblclick="changeType">
-      {{model.name}}
-      <span v-if="isFolder">[{{open ? '-' : '+'}}]</span>
-    </div>
-    <ul v-show="open" v-if="isFolder">
-      <item
-        class="item"
-        v-for="model in model.children"
-        :model="model">
-      </item>
-      <li @click="addChild">+</li>
-    </ul>
+
+<ul id="accounts">
+  <li v-for="(index, account) in accounts">
+   {{index}}. <a href="account.html?_id={{account._id}}">{{account.name}}</a> | [<a v-on:click.prevent="deleteAccount(account)" href="">remove</a>]
   </li>
-</script>
-
-<p>(You can double click on an item to turn it into a folder.)</p>
-
-<!-- the demo root element -->
-<ul id="demo">
-  <item
-    class="item"
-    :model="treeData">
-  </item>
 </ul>
+
 <script src="accounts.js"></script>
 </body>
 </html>

@@ -22,3 +22,7 @@ To to:
 
 Or
 - Run the 4YB exe if you installed from the package
+
+## Links
+
+https://www.iconfinder.com/iconsets/finance-10

@@ -1,77 +1,25 @@
 const Vue = require('vue')
 
-// demo data
-var data = {
-  name: 'My Tree',
-  children: [
-    { name: 'hello' },
-    { name: 'wat' },
-    {
-      name: 'child folder',
-      children: [
-        {
-          name: 'child folder',
-          children: [
-            { name: 'hello' },
-            { name: 'wat' }
-          ]
-        },
-        { name: 'hello' },
-        { name: 'wat' },
-        {
-          name: 'child folder',
-          children: [
-            { name: 'hello' },
-            { name: 'wat' }
-          ]
-        }
-      ]
-    }
-  ]
-}
 
-// define the item component
-Vue.component('item', {
-  template: '#item-template',
-  props: {
-    model: Object
-  },
-  data: function () {
-    return {
-      open: false
-    }
-  },
-  computed: {
-    isFolder: function () {
-      return this.model.children &&
-        this.model.children.length
-    }
-  },
-  methods: {
-    toggle: function () {
-      if (this.isFolder) {
-        this.open = !this.open
-      }
-    },
-    changeType: function () {
-      if (!this.isFolder) {
-        Vue.set(this.model, 'children', [])
-        this.addChild()
-        this.open = true
-      }
-    },
-    addChild: function () {
-      this.model.children.push({
-        name: 'new stuff'
-      })
-    }
-  }
-})
+var Datastore = require('nedb'), db = new Datastore({ filename: 'test.json', autoload: true });
+var accounts;
+db.find({}).sort({ id: -1 }).exec(function (err, docs) {
+        accounts = docs;
+        var accountVue = new Vue({
+            el: '#accounts',
+            data: {
+                accounts: accounts
+            },
 
-// boot up the demo
-var demo = new Vue({
-  el: '#demo',
-  data: {
-    treeData: data
-  }
-})
+            // methods
+            methods: {
+                deleteAccount: function (account) {
+                    console.log("delete " + account._id);
+                    db.remove({ _id: account._id }, {}, function (err, numRemoved) {
+                        // numRemoved = 1
+                        accountVue.accounts.$remove(account);
+                    });
+                }
+            }
+        })
+});
