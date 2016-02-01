@@ -1,9 +1,9 @@
-<h3><b>{{ menuTitle | lower }}</b></h3>
+<h3><b>{{ menuTitle | lowercase }}</b></h3>
  
 <li class="active">
 <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span> Accounts</a>
     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-        <li><a href="accounts.html">View Accounts</a></li>
+        <li><a v-on:click.prevent="changeView('listAccounts')">View Accounts</a></li>
         <li><a href="account.html">Add an Account</a></li>
     </ul>
 </li>
@@ -14,17 +14,17 @@
 </ul>
 </li>
 <li>
-    <a v-on:click.prevent="removeUser(user)" href=""><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Test (Remove)</a>
+    <a @click.prevent="removeUser('comp1')" href=""><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Test (Remove)</a>
 </li>
 <li>
-    <a v-on:click.prevent="addUser(user)" href=""><span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Test (Add)</a>
+    <a @click.prevent="changeView('comp1')" href=""><span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Test (Add)</a>
+</li>
+<li>
+    <a @click.prevent="changeView('comp3')" href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>Comp 3</a>
+</li>
+<li>
+<a href="list-tree.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>List Tree Example</a>
 </li>
 <!--li>
-<a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
-</li>
-<li>
-<a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
-</li>
-<li>
 <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>About</a>
 </li-->    

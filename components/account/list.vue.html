@@ -1,0 +1,8 @@
+{{title}}
+<ul id="accounts">
+  <li v-for="(index, account) in accounts">
+   {{index}}. <a href="account.html?_id={{account._id}}">{{account.name}}</a> | [<a v-on:click.prevent="deleteAccount(account)" href="">remove</a>]
+  </li>
+</ul>
+
+<script src="accounts.js"></script>

@@ -1,2 +1,3 @@
-{"name":"Salary","code":"sal","type":"IN","parent":"","description":"Salaries account","hidden":"","placeholder":"","active":true,"_id":"RVfrhaWNFrrHN5Ku","createdAt":{"$$date":1454209354761},"updatedAt":{"$$date":1454209354761}}
-{"id":0,"name":"Utilities","code":"code1","type":"EX","parent":"01","description":"description","active":true,"placeholder":true,"hidden":true,"_id":"fj5HYJZ0FVfJvsDf","updatedAt":{"$$date":1454207922276}}
+{"id":0,"name":"Utilities 1","code":"code1","type":"EX","parent":"01","description":"description","active":true,"placeholder":true,"hidden":true,"_id":"fj5HYJZ0FVfJvsDf","updatedAt":{"$$date":1454207922276}}
+{"id":0,"name":"Utilities 2","code":"code1","type":"EX","parent":"01","description":"description","active":true,"placeholder":true,"hidden":true,"_id":"i0j5HYJZ0FVJvsDf","updatedAt":{"$$date":1454207922276}}
+{"id":0,"name":"Utilities 3","code":"code1","type":"EX","parent":"01","description":"description","active":true,"placeholder":true,"hidden":true,"_id":"p0j5HYJZ0FVJvsDf","updatedAt":{"$$date":1454207922276}}
