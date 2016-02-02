@@ -6,15 +6,13 @@ var Vue = require('vue');
 
 exports.sidebar = Vue.extend({
     data: function () {
-        return { menuTitle: "4yb" }
+        return { 
+            menuTitle: "4yb",
+            links: jetpack.read('./components/shell/sidebar.vue.json','json')
+        }
     },
-    template: jetpack.read('./components/sidebar.vue.html'),
+    template: jetpack.read('./components/shell/sidebar.vue.html'),
     methods: {
-        removeUser: null /*function (user) {
-            db.find({}).sort({ id: -1 }).exec(function (err, docs) {
-                    console.log(docs);
-            });
-        }*/,
         changeView: function (view) {
             console.log("Change view from " + this.$root.currentView + " to " + view);
             this.$root.currentView = view;

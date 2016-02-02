@@ -1,8 +1,18 @@
-{{title}}
-<ul id="accounts">
-  <li v-for="(index, account) in accounts">
-   {{index}}. <a href="account.html?_id={{account._id}}">{{account.name}}</a> | [<a v-on:click.prevent="deleteAccount(account)" href="">remove</a>]
-  </li>
-</ul>
+<h2>{{title}}</h2>
 
-<script src="accounts.js"></script>
+<hr />
+<button @click.prevent="changeView('comp4ybFormAccount')" type="button" class="btn btn-primary">New Account</button>
+<hr />
+
+<template v-if="accounts.length > 0">
+    <ul id="accounts">
+        <li v-for="(index, account) in accounts">
+        {{index + 1}}. 
+        <a href="account.html?_id={{account._id}}">{{account.name}}</a> | 
+        [<a v-on:click.prevent="deleteAccount(account)" href="">remove</a>]
+        </li>
+    </ul>
+</template>
+<template v-else>
+    <p>No account has been created yet. Would you like to create one?</p>
+</template>

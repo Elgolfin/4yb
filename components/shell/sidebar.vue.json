@@ -1,0 +1,22 @@
+[
+    {
+        "name":"Dashboard",
+        "view":"comp4ybDashboard",
+        "icon":"dashboard"
+    },
+    {
+        "name": "Accounts",
+        "view": "comp4ybListAccounts",
+        "icon": "book"
+    },
+    {
+        "name": "Transactions",
+        "view": "",
+        "icon": "credit-card"
+    },
+    {
+        "name": "Charts",
+        "view": "comp4ybGraphMain",
+        "icon": "bar-chart"
+    }
+]

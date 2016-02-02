@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "main": "main.js",
   "dependencies": {
-    "bluebird": "^3.1.5",
     "fs-jetpack": "^0.7.1",
     "nedb": "^1.7.2",
     "vue": "^1.0.16"

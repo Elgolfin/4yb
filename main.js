@@ -124,16 +124,16 @@ app.on('ready', function() {
 
 const jetpack = require('fs-jetpack').cwd(app.getAppPath())
 var Datastore = require('nedb');
-global.openedFile = 'default.4yb';
+global.filepath = 'default.4yb';
 global.db_4yb = new Datastore({ filename: global.openedFile, autoload: true });
 var showOpen = function() {
 	dialog.showOpenDialog({ properties: [ 'openFile'], filters: [{ name: '4yb', extensions: ['4yb', 'json'] }]}, function(filenames){
         if (filenames === undefined) return;
         var filename = filenames[0];
         console.log("Opening file... " + filename);
-        global.openedFile = jetpack.inspect(filename).name
-        console.log("Global variable has been set: " + global.openedFile);
-        global.db_4yb = new Datastore({ filename: global.openedFile, autoload: true })
+        global.filepath = filename
+        console.log("Global variable has been set: " + global.filepath);
+        global.db_4yb = new Datastore({ filename: global.filepath, autoload: true })
         // Refresh the application to use the new file
         mainWindow.loadURL('file://' + __dirname + '/app.html');
     });

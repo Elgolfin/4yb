@@ -6,5 +6,5 @@ exports.comp1 = Vue.extend({
     data: function () {
         return { title: "comp1 title", comp1: "comp1" }
     },
-    template: jetpack.read('./components/comp1.vue.html')
+    template: jetpack.read('./components/test/comp1.vue.html')
 });

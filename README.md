@@ -4,6 +4,7 @@
 
 - git clone https://github.com/Elgolfin/4yb.git
 - Install electron-prebuilt globally (npm install -g electron-prebuilt)
+- npm install
 - Run the app (electron .)
 
 ## Package

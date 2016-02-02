@@ -2,9 +2,9 @@ const app = require('remote').require('app');
 const jetpack = require('fs-jetpack').cwd(app.getAppPath());
 var Vue = require('vue');
 
-exports.comp2 = Vue.extend({
+exports.dashboard = Vue.extend({
     data: function () {
-        return { title: "comp2 title", comp2: "comp2" }
+        return { title: "Dashboard", dashboard: "dashboard" }
     },
-    template: jetpack.read('./components/comp2.vue.html')
+    template: jetpack.read('./components/dashboard/dashboard.vue.html')
 });

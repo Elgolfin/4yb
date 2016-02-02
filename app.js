@@ -18,27 +18,39 @@ const jetpack = require('fs-jetpack').cwd(app.getAppPath())
 const Vue = require('vue');
 
 var db_4yb = require('remote').getGlobal('db_4yb');
-var db_4yb_filename = require('remote').getGlobal('openedFile');
+var db_4yb_filepath = require('remote').getGlobal('filepath');
 //alert(db_4yb);
 
 // Load all components
-var comp1 = require('./components/comp1.vue.js').comp1;
-var comp2 = require('./components/comp2.vue.js').comp2;
-var comp3 = require('./components/comp3.vue.js').comp3;
+var sidebar = require('./components/shell/sidebar.vue.js').sidebar;
+var dashboard = require('./components/dashboard/dashboard.vue.js').dashboard;
 var listAccounts = require('./components/account/list.vue.js').ListAccounts;
-var sidebar = require('./components/sidebar.vue.js').sidebar;
+var formAccount = require('./components/account/form.vue.js').formAccount;
+var mainGraph = require('./components/graph/main.vue.js').main;
+var comp1 = require('./components/test/comp1.vue.js').comp1;
+var comp2 = require('./components/test/comp2.vue.js').comp2;
+var comp3 = require('./components/test/comp3.vue.js').comp3;
 
 // Register components
 var mainVM = new Vue({
     el: 'body',
     data: {
-        currentView: 'comp2'
+        currentView: 'comp4ybListAccounts'
     },
     components: {
         comp1: comp1,
         comp2: comp2,
         comp3: comp3,
-        listAccounts: listAccounts,
-        comp4ybSidebar: sidebar
+        comp4ybListAccounts: listAccounts,
+        comp4ybFormAccount: formAccount,
+        comp4ybSidebar: sidebar,
+        comp4ybDashboard: dashboard,
+        comp4ybGraphMain:mainGraph
+    },
+    methods: {
+        changeView: function (view) {
+            console.log("Change view from " + this.$root.currentView + " to " + view);
+            this.$root.currentView = view;
+        }
     }
 })
