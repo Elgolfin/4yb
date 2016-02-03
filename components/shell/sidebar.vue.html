@@ -2,25 +2,11 @@
     <template v-if="links.length > 0">
         <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
 
-            <li v-for="link in links">
+            <template v-for="link in links">
+            <li :class="{active: currentView == link.view}">
                 <a @click.prevent="changeView(link.view)"  href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-{{link.icon}} fa-stack-1x "></i></span> {{link.name}}</a>
             </li>
-
-            <!--li class="active">
-                <a @click.prevent="changeView('comp4ybDashboard')"  href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span> Dashboard</a>
-            </li>
-            <li>
-                <a @click.prevent="changeView('comp4ybListAccounts')"  href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-book fa-stack-1x "></i></span> Accounts</a>
-            </li>
-            <li>
-                <a href="account.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-book fa-stack-1x "></i></span> Add an account</a>
-            </li>
-            <li>
-                <a @click.prevent="changeView('comp4ybGraphMain')" href=""><span class="fa-stack fa-lg pull-left"><i class="fa fa-area-chart fa-stack-1x "></i></span>Charts</a>
-            </li-->
-            <li>
-                <a href="grid.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-table fa-stack-1x "></i></span> Grid Example</a>
-            </li>
+            </template>
             <li>
                 <a href="list-tree.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-tree fa-stack-1x "></i></span>List Tree Example</a>
             </li> 

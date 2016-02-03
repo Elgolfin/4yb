@@ -2,6 +2,7 @@ const app = require('remote').require('app');
 const jetpack = require('fs-jetpack').cwd(app.getAppPath());
 var Vue = require('vue');
 var Datastore = require('nedb'), db = new Datastore({ filename: db_4yb_filepath, autoload: true });
+var mixin = require('../../mixins/mixins.js').mixin;
 
 exports.ListAccounts = Vue.extend({
     data: function () {
@@ -19,16 +20,17 @@ exports.ListAccounts = Vue.extend({
             db.remove({ _id: account._id }, {}, function (err, numRemoved) {
                 vm.accounts.$remove(account);
             });
-        },
+        }/*,
         changeView: function (view) {
             console.log("Change view from " + this.$root.currentView + " to " + view);
             this.$root.currentView = view;
-        }
+        }*/
     },
     created: function () {
         var vm = this;
         db.find({}).sort({ id: -1 }).exec(function (err, docs) {
             vm.accounts = docs;
         });
-    }
+    },
+    mixins:[mixin]
 });

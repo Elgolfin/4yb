@@ -10,26 +10,26 @@
 }
  
 #wrapper.toggled {
-    padding-left: 250px;
+    padding-left: 230px;
     overflow: scroll;
 }
  
 #sidebar-wrapper {
     z-index: 1000;
     position: absolute; 
-    left: 250px;
+    left: 230px;
     width: 0;
     height: 100%;
-    margin-left: -250px;
+    margin-left: -230px;
     overflow-y: auto;
-    background: #000;
+    background: #1E1E1E;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
 #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+    width: 230px;
 }
  
 #page-content-wrapper {
@@ -53,7 +53,7 @@
 .sidebar-nav {
     position: absolute;
     top: 0;
-    width: 250px;
+    width: 230px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -63,19 +63,20 @@
 .sidebar-nav li {
     text-indent: 15px;
     line-height: 40px;
+    
 }
  
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #999999;
+    color: #6C6C6C;
 }
  
 .sidebar-nav li a:hover {
     text-decoration: none;
-    color: #fff;
+    color: #ccc;
     background: rgba(255,255,255,0.2);
-    border-left: red 2px solid;
+    border-left: #007acc 2px solid;
 }
  
 .sidebar-nav li a:active,
@@ -84,9 +85,9 @@
 }
  
 .sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
+    height: 55px;
+    font-size: 14px;
+    line-height: 50px;
 }
  
 .sidebar-nav > .sidebar-brand a {
@@ -94,7 +95,7 @@
 }
  
 .sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
+    color: #ccc;
     background: none;
 }
 .no-margin{
@@ -103,27 +104,27 @@
  
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 250px;
+        padding-left: 230px;
     }
     .fixed-brand{
-        width: 250px;
+        width: 230px;
     }
     #wrapper.toggled {
         padding-left: 0;
     }
  
     #sidebar-wrapper {
-        width: 250px;
+        width: 230px;
     }
  
     #wrapper.toggled #sidebar-wrapper {
-        width: 250px;
+        width: 230px;
     }
     #wrapper.toggled-2 #sidebar-wrapper {
         width: 50px;
     }
     #wrapper.toggled-2 #sidebar-wrapper:hover {
-        width: 250px;
+        width: 230px;
     }
  
  
@@ -139,7 +140,7 @@
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
-        padding-left: 250px;
+        padding-left: 230px;
     }
     #wrapper.toggled-2 #page-content-wrapper {
         position: relative;

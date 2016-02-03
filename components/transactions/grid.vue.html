@@ -1,0 +1,31 @@
+{{title}}
+
+<table>
+    <thead>
+      <tr>
+        <th v-for="key in columns"
+          @click="sortBy(key)"
+          :class="{active: sortKey == key}">
+          {{ key | camelCase }}
+          <span class="arrow"
+            :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="
+        entry in data
+        | filterBy filterKey
+        | orderBy sortKey sortOrders[sortKey]">
+        <td v-for="key in columns">
+          <template v-if="key == 'posted_date'">
+                {{ entry[key] | formatDate }}
+          </template>
+          <template v-else>
+                {{ entry[key] }}
+          </template>
+        </td>
+      </tr>
+    </tbody>
+</table>

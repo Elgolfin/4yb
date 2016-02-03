@@ -4,7 +4,7 @@ var Vue = require('vue');
 
 exports.main = Vue.extend({
     data: function () {
-        return { title: "Graph", graph: "graph" }
+        return { title: "Charts" }
     },
-    template: jetpack.read('./components/graph/main.vue.html')
+    template: jetpack.read('./components/charts/main.vue.html')
 });

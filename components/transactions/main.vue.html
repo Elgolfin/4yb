@@ -1,0 +1,13 @@
+<h2>{{title}}</h2>
+
+<div id="transactions">
+    <form id="search">
+        Search <input name="query" v-model="searchQuery">
+    </form>
+    <comp-4yb-transactions-grid
+        title=""
+        :data="gridData"
+        :columns="gridColumns"
+        :filter-key="searchQuery">
+    </comp-4yb-transactions-grid>
+</div>
