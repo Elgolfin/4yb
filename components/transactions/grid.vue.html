@@ -19,13 +19,21 @@
         | filterBy filterKey
         | orderBy sortKey sortOrders[sortKey]">
         <td v-for="key in columns">
-          <template v-if="key == 'posted_date'">
+          <template v-if="key.indexOf('date') > -1">
                 {{ entry[key] | formatDate }}
           </template>
           <template v-else>
-                {{ entry[key] }}
+                <template v-if="key == 'credit' || key == 'debit'">
+                    {{ entry[key] | currency }}
+                </template>
+                <template v-else>
+                    {{ entry[key] }}
+                </template>
           </template>
         </td>
       </tr>
     </tbody>
 </table>
+
+Total Credit: {{totalCredit | currency}}<br />
+Total Debit: {{totalDebit | currency}}<br />

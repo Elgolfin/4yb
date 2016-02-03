@@ -1,2 +1,8 @@
-{"id":0,"name":"Utilities","code":"code1","type":"EX","parent":"01","description":"description","active":true,"placeholder":true,"hidden":true,"_id":"fj5HYJZ0FVfJvsDf","updatedAt":{"$$date":1454207922276}}
-{"id":0,"name":"Utilities dsf","code":"code1","type":"EX","parent":"01","description":"description","active":true,"placeholder":true,"hidden":true,"_id":"i0j5HYJZ0FVJvsDf","updatedAt":{"$$date":1454207922276}}
+{"_id":"123","entity":"transaction","code":"Nico","posted_date":"2016-02-03","transaction_date":"2016-01-31","debit":"","credit":2768.98,"transfer_from":"1","transfer_to":"2","note":"","group_id":""}
+{"_id":"a0j5HYJZ0FVJvsDf","entity":"transaction","code":"Jackie Chan","posted_date":"2016-01-27","transaction_date":"2016-01-26","debit":3.25,"credit":"","transfer_from":"1","transfer_to":"2","note":"","group_id":""}
+{"id":1,"entity":"account","name":"Utilities","code":"code1","type":"EX","parent":"01","description":"description","active":true,"placeholder":true,"hidden":true,"_id":"fj5HYJZ0FVfJvsDf","updatedAt":{"$$date":1454207922276}}
+{"id":2,"entity":"account","name":"Utilities dsf","code":"code1","type":"EX","parent":"01","description":"description","active":true,"placeholder":true,"hidden":true,"_id":"i0j5HYJZ0FVJvsDf","updatedAt":{"$$date":1454207922276}}
+{"_id":"q0j5HYJZ0FVJvsDf","entity":"transaction","code":"Jet Li","posted_date":"2016-02-07","transaction_date":"2016-02-05","debit":302.25,"credit":"","transfer_from":"1","transfer_to":"2","note":"","group_id":""}
+{"_id":"r0j5HYJZ0FVJvsDf","entity":"transaction","code":"Bruce Lee","posted_date":"2016-01-03","transaction_date":"2015-11-03","debit":3.25,"credit":"","transfer_from":"1","transfer_to":"2","note":"","group_id":""}
+{"_id":"w0j5HYJZ0FVJvsDf","entity":"transaction","code":"Chuck Norris","posted_date":"2016-01-07","transaction_date":"2016-01-03","debit":234,"credit":"","transfer_from":"1","transfer_to":"2","note":"","group_id":""}
+{"_id":"z0j5HYJZ0FVJvsDf","entity":"transaction","code":"Bruce Lee","posted_date":"2016-02-03","transaction_date":"2016-01-31","debit":"","credit":199.99,"transfer_from":"1","transfer_to":"2","note":"","group_id":""}

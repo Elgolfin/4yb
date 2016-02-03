@@ -20,15 +20,11 @@ exports.ListAccounts = Vue.extend({
             db.remove({ _id: account._id }, {}, function (err, numRemoved) {
                 vm.accounts.$remove(account);
             });
-        }/*,
-        changeView: function (view) {
-            console.log("Change view from " + this.$root.currentView + " to " + view);
-            this.$root.currentView = view;
-        }*/
+        }
     },
     created: function () {
         var vm = this;
-        db.find({}).sort({ id: -1 }).exec(function (err, docs) {
+        db.find({entity: 'account'}).sort({ id: -1 }).exec(function (err, docs) {
             vm.accounts = docs;
         });
     },
