@@ -1,7 +1,7 @@
 <h2>{{title}}</h2>
 
 <hr />
-<button @click.prevent="changeView('comp4ybFormAccount')" type="button" class="btn btn-primary">New Account</button>
+<button @click.prevent="changeView('comp4ybFormAccount', reset = true)" type="button" class="btn btn-primary">New Account</button>
 <hr />
 
 <template v-if="accounts.length">
