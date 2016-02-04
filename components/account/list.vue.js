@@ -23,14 +23,8 @@ exports.ListAccounts = Vue.component('comp-4yb-list-accounts', {
             console.log("view account: " + account._id);
             console.log(account);
             var vm = this;
-            var vmFormAccount = Vue.component('comp-4yb-form-account');
-            console.log(vmFormAccount);
-            //vmFormAccount.$set('account', account);
             this.$root.currentView = "comp4ybFormAccount";
-            console.log(this.$root);
-            console.log(this.$root.$children[2].account);
-            this.$root.$children[2].$set('account.name', account.name);
-            console.log(this.$root);
+            this.$root.viewData = account;
         }
     },
     created: function () {

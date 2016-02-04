@@ -40,7 +40,8 @@ var mixin = require('./mixins/mixins.js').mixin;
 var mainVM = new Vue({
     el: 'body',
     data: {
-        currentView: 'comp4ybListAccounts'
+        currentView: 'comp4ybListAccounts',
+        viewData: null
     },
     components: {
         comp1: comp1,
