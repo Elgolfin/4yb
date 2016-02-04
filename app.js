@@ -19,7 +19,6 @@ const Vue = require('vue');
 
 var db_4yb = require('remote').getGlobal('db_4yb');
 var db_4yb_filepath = require('remote').getGlobal('filepath');
-//alert(db_4yb);
 
 // Load all components
 var sidebar = require('./components/shell/sidebar.vue.js').sidebar;

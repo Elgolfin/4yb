@@ -1,7 +1,6 @@
 const app = require('remote').require('app');
 const jetpack = require('fs-jetpack').cwd(app.getAppPath());
 var Vue = require('vue');
-var Datastore = require('nedb'), db = new Datastore({ filename: db_4yb_filepath, autoload: true });
 
 exports.main = Vue.extend({
     name: 'comp-4yb-transactions'
@@ -9,73 +8,25 @@ exports.main = Vue.extend({
         return {
             title: 'Transactions',
             searchQuery: '',
-            gridColumns: ['code', 'description', 'posted_date', 'transaction_date', 'credit', 'debit', 'transfer_from', 'note'],
-            gridData: ''/*[
-                { 
-                    entity: 'transaction',
-                    code: 'Chuck Norris',
-                    description: 'desc', 
-                    posted_date: new Date('1995-12-17'), 
-                    transaction_date: new Date('1995-12-18'),
-                    debit: 123.45,
-                    credit: null,
-                    transfer_to: 1,
-                    transfer_from: 2,
-                    note: '',
-                    group_id: null 
-                },
-                { 
-                    entity: 'transaction',
-                    code: 'Jackie Chan', 
-                    posted_date: new Date('1996-12-17'), 
-                    transaction_date: new Date('1997-01-01'),
-                    debit: null,
-                    credit: 2134.67,
-                    transfer_to: 1,
-                    transfer_from: 2,
-                    note: '',
-                    group_id: null 
-                },
-                { 
-                    entity: 'transaction',
-                    code: 'Bruce Lee', 
-                    posted_date: new Date('1996-12-19'), 
-                    transaction_date: new Date('1996-12-22'),
-                    debit: 3.45,
-                    credit: null,
-                    transfer_to: 1,
-                    transfer_from: 2,
-                    note: '',
-                    group_id: null  
-                },
-                { 
-                    entity: 'transaction',
-                    code: 'Jet Li', 
-                    posted_date: new Date('1996-10-17'), 
-                    transaction_date: new Date('1996-10-18'),
-                    debit: 123,
-                    credit: null,
-                    transfer_to: 1,
-                    transfer_from: 2,
-                    note: '',
-                    group_id: null  
-                }
-            ]*/
+            gridColumns: ['_id', 'code', 'description', 'posted_date', 'transaction_date', 'credit', 'debit', 'transfer_from', 'note'],
+            gridData: ''
         }
     }
     ,template: jetpack.read('./components/transactions/main.vue.html')
     ,ready: function() {
-        var transactionsVM = new Vue({
+        var vm = this;
+        new Vue({
             el: '#transactions',
             components: {
                 comp4ybTransactionsGrid: exports.grid
-            }
+            },
+            parent: vm
         });
     },
     created: function () {
         var vm = this;
-        db.find({entity: 'transaction'}).sort({ transaction_date: -1 }).exec(function (err, docs) {
-            vm.gridData = docs;
+        db_4yb.find({entity: 'transaction'}).sort({ transaction_date: -1 }).exec(function (err, docs) {
+            vm.gridData = JSON.parse(JSON.stringify(docs));
         });
     }
 });
@@ -95,7 +46,8 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
         })
         return {
             sortKey: '',
-            sortOrders: sortOrders
+            sortOrders: sortOrders,
+            transaction: {code: "", description: "", transaction_date: new Date(), posted_date: new Date(), debit: null, credit: null, transfert_Account: 3, note: ""}
         }
     },
     computed: {
@@ -122,7 +74,33 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
         sortBy: function (key) {
             this.sortKey = key
             this.sortOrders[key] = this.sortOrders[key] * -1
+        },
+        insertTransaction: function () {
+            console.log(this.transaction);
+            //console.log(this.transaction.posted_date);
+            this.transaction.entity = "transaction";
+            var vm = this;
+            db_4yb.insert(this.transaction, function (err, newDoc) {
+                console.log(vm.data);
+                console.log(err);
+                console.log(newDoc);
+                vm.transaction = {code: "", description: "", transaction_date: new Date(), posted_date: new Date(), debit: null, credit: null, transfert_Account: 3, note: ""};
+                vm.data.push(JSON.parse(JSON.stringify(newDoc)));
+            });
+            
+        },
+        deleteTransaction: function (transaction) {
+            //console.log(this.transaction.posted_date);
+            console.log(transaction);
+            var vm = this;
+            db_4yb.remove({ _id: transaction._id }, {}, function (err, numRemoved) {
+                console.log(err);
+                console.log(numRemoved);
+                vm.data.$remove(transaction);
+            });
+            
         }
+            
  
     }
     ,filters: {

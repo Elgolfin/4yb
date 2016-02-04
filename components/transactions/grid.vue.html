@@ -27,7 +27,12 @@
                     {{ entry[key] | currency }}
                 </template>
                 <template v-else>
-                    {{ entry[key] }}
+                    <template v-if="key == '_id'">
+                        <a @click.prevent="deleteTransaction(entry)" href="">{{ entry[key] }}</a>
+                    </template>
+                    <template v-else>
+                        {{ entry[key] }}
+                    </template>
                 </template>
           </template>
         </td>
@@ -37,3 +42,69 @@
 
 Total Credit: {{totalCredit | currency}}<br />
 Total Debit: {{totalDebit | currency}}<br />
+
+<form class="form-inline">
+  
+    <div class="form-group">
+        <label for="transaction_code">Code</label>
+        <input type="text" class="form-control" id="transaction_code" :value="transaction.code" placeholder="Code">
+    </div>
+  
+    <div class="form-group">
+        <label for="transaction_description">Description</label>
+        <input type="text" class="form-control" id="transaction_description" :value="transaction.description" placeholder="Description">
+    </div>
+    
+    <br />
+    
+    <div class="form-group">
+        <label for="transaction_date">Transaction Date</label>
+        <input type="date" class="form-control" id="transaction_date" :value="transaction.transaction_date" placeholder="Transaction Date">
+    </div>
+  
+  
+    <div class="form-group">
+        <label for="posted_date">Posted Date</label>
+        <input type="date" class="form-control" id="posted_date" :value="transaction.posted_date" placeholder="Posted Date">
+    </div>
+    
+    <br />
+    
+    <div class="form-group">
+        <label class="sr-only" for="transaction_credit">Transfer Account</label>
+        <select id="transaction_transfer_account" class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+    </div>
+  
+    <div class="form-group">
+        <label class="sr-only" for="transaction_credit">Credit</label>
+        <div class="input-group">
+        <div class="input-group-addon">$</div>
+            <input type="text" class="form-control" id="transaction_credit" :value="transaction.credit" placeholder="Credit">
+        </div>
+    </div>
+  
+    <div class="form-group">
+        <label class="sr-only" for="transaction_debit">Debit</label>
+        <div class="input-group">
+        <div class="input-group-addon">$</div>
+            <input type="text" class="form-control" id="transaction_debit" :value="transaction.debit" placeholder="Debit">
+        </div>
+    </div>
+    
+    <br />
+  
+    <div class="form-group">
+        <label for="transaction_note"></label>
+        <input type="textarea" class="form-control" id="transaction_note" :value="transaction.note" placeholder="Note">
+    </div>
+    
+    <br />
+  
+    <button @click.prevent="insertTransaction" type="submit" class="btn btn-primary">Add Transaction</button>
+</form>
