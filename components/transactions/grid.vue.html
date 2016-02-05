@@ -1,6 +1,7 @@
 {{title}}
 
-<table>
+<div class="table-responsaive">
+<table class="table">
     <thead>
       <tr>
         <th v-for="key in columns"
@@ -14,65 +15,100 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="
-        entry in data
-        | filterBy filterKey
-        | orderBy sortKey sortOrders[sortKey]">
-        <td v-for="key in columns">
-          <template v-if="key.indexOf('date') > -1">
+      <tr v-for="(idxT, entry) in data | filterBy filterKey">
+        <td v-for="(index,key) in columns" :class="key">
+            <template v-if="key.indexOf('date') > -1">
                 {{ entry[key] | formatDate }}
-          </template>
-          <template v-else>
-                <template v-if="key == 'credit' || key == 'debit'">
-                    {{ entry[key] | currency }}
+            </template>
+            <template v-if="key == 'credit' || key == 'debit'">
+                {{ entry[key] | currency }}
+                <!--div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" class="form-control" v-model="entry[key]">
+                </div-->
+            </template>
+            <template v-if="key == 'description'">
+                <template v-if="data[idxT].note.length > 0">
+                    <a @click.prevent="deleteTransaction(entry)" href="">{{ entry[key] }}</a>
+                    / {{data[idxT].note}}
+                    <!-- le lien avec la note disparait quand on filtre, l'index change!-->
                 </template>
                 <template v-else>
-                    <template v-if="key == '_id'">
-                        <a @click.prevent="deleteTransaction(entry)" href="">{{ entry[key] }}</a>
-                    </template>
-                    <template v-else>
-                        {{ entry[key] }}
-                    </template>
+                    {{ entry[key] }}
                 </template>
-          </template>
+            </template>
+            <template v-if="key == 'delete'">
+                <button @click.prevent="deleteTransaction(entry)" class="btn btn-default" style="display:inline-block"><span class="glyphicon glyphicon-remove" style="color:#700"></span></button>
+            </template>
+            <template v-if="key == 'save'">
+                <button @click.prevent="editTransaction(entry)" class="btn btn-default" style="display:inline-block;">Edit</button>
+            </template>
+            <template v-if="key == 'balance'">
+                {{ (data[idxT].credit - data[idxT].debit) | balance idxT | currency }}
+            </template>
+            <template v-if="key == 'code'">
+                {{ entry[key] }}
+            </template>
+            <template v-if="key == 'transfer'">
+                {{ entry[key] }}
+            </template>
         </td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <th v-for="key in columns">
+            <template v-if="key == 'credit'">
+                    {{totalCredit | currency}}
+            </template>
+            <template v-else>
+                <template v-if="key == 'debit'">
+                        {{totalDebit | currency}}
+                </template>
+                <template v-else>
+                    <template v-if="key == 'balance'">
+                        {{currentBalance | currency}}
+                </template>
+                </template>
+            </template>
+        </th>
+      </tr>
+    </tfoot>
 </table>
+</div>
 
-Total Credit: {{totalCredit | currency}}<br />
-Total Debit: {{totalDebit | currency}}<br />
+<hr />
 
 <form class="form-inline">
   
     <div class="form-group">
         <label for="transaction_code">Code</label>
-        <input type="text" class="form-control" id="transaction_code" :value="transaction.code" placeholder="Code">
+        <input type="text" class="form-control" id="transaction_code" v-model="transaction.code" placeholder="Code">
     </div>
   
     <div class="form-group">
         <label for="transaction_description">Description</label>
-        <input type="text" class="form-control" id="transaction_description" :value="transaction.description" placeholder="Description">
+        <input type="text" class="form-control" id="transaction_description" v-model="transaction.description" placeholder="Description">
     </div>
     
     <br />
     
     <div class="form-group">
         <label for="transaction_date">Transaction Date</label>
-        <input type="date" class="form-control" id="transaction_date" :value="transaction.transaction_date" placeholder="Transaction Date">
+        <input type="date" class="form-control" id="transaction_date" v-model="transaction.transaction_date" placeholder="Transaction Date">
     </div>
   
   
     <div class="form-group">
         <label for="posted_date">Posted Date</label>
-        <input type="date" class="form-control" id="posted_date" :value="transaction.posted_date" placeholder="Posted Date">
+        <input type="date" class="form-control" id="posted_date" v-model="transaction.posted_date" placeholder="Posted Date">
     </div>
     
     <br />
     
     <div class="form-group">
         <label class="sr-only" for="transaction_credit">Transfer Account</label>
-        <select id="transaction_transfer_account" class="form-control">
+        <select id="transaction_transfer_account" v-model="transaction.transfer" class="form-control">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -85,7 +121,7 @@ Total Debit: {{totalDebit | currency}}<br />
         <label class="sr-only" for="transaction_credit">Credit</label>
         <div class="input-group">
         <div class="input-group-addon">$</div>
-            <input type="text" class="form-control" id="transaction_credit" :value="transaction.credit" placeholder="Credit">
+            <input type="text" class="form-control" id="transaction_credit" v-model="transaction.credit" placeholder="Credit">
         </div>
     </div>
   
@@ -93,7 +129,7 @@ Total Debit: {{totalDebit | currency}}<br />
         <label class="sr-only" for="transaction_debit">Debit</label>
         <div class="input-group">
         <div class="input-group-addon">$</div>
-            <input type="text" class="form-control" id="transaction_debit" :value="transaction.debit" placeholder="Debit">
+            <input type="text" class="form-control" id="transaction_debit" v-model="transaction.debit" placeholder="Debit">
         </div>
     </div>
     
@@ -101,7 +137,7 @@ Total Debit: {{totalDebit | currency}}<br />
   
     <div class="form-group">
         <label for="transaction_note"></label>
-        <input type="textarea" class="form-control" id="transaction_note" :value="transaction.note" placeholder="Note">
+        <input type="textarea" class="form-control" id="transaction_note" v-model="transaction.note" placeholder="Note">
     </div>
     
     <br />
