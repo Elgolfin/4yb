@@ -32,7 +32,9 @@ exports.main = Vue.extend({
     },
     template: jetpack.read('./components/charts/main.vue.html'),
     ready: function(){
-        var ctx = document.getElementById("myChart").getContext("2d");
-        var myBarChart = new Chart(ctx).Bar(this.data);
+        var ctx1 = document.getElementById("myChart1").getContext("2d");
+        var myBarChart1 = new Chart(ctx1).Bar(this.data);
+        var ctx2 = document.getElementById("myChart2").getContext("2d");
+        var myBarChart2 = new Chart(ctx2).Line(this.data);
     }
 });
