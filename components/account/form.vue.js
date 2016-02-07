@@ -43,6 +43,7 @@ exports.formAccount = Vue.component('comp-4yb-form-account', {
     activate: function (done) {
         var self = this;
         this.account = this.$root.viewData;
+        this.account._id ? this.title = "Edit Account" : this.title = "Add Account";
         done();
     },
     created: function (done) {
