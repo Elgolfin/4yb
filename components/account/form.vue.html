@@ -1,4 +1,4 @@
-<h2>{{title}}</h2>
+<h2>{{title}} / (Current Path: {{currentPath}})</h2>
 
 <form method="post" action="/" id="account">
     <div class="row">
@@ -27,6 +27,7 @@
                     <option value="EXP">Expense</option>
                     <option value="INC">Income</option>
                     <option value="LIA">Liabilities</option>
+                    <option value="EQ">Equity</option>
                 </select> 
             </div> 
         </div>
@@ -34,7 +35,8 @@
             <div class="form-group">
                 <label for="parent">Parent Account</label>
                 <select class="form-control" v-model="account.parent" id="parent" name="parent">
-                    <option v-for="option in accounts" :value="option._id">
+                    <option value="a">Root</option>
+                    <option v-for="option in accounts" :value="option.path">
                         {{ option.name }}
                     </option>
                 </select> 

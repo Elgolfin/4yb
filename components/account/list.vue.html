@@ -4,14 +4,21 @@
 <button @click.prevent="changeView('comp4ybFormAccount', reset = true)" type="button" class="btn btn-primary">New Account</button>
 <hr />
 
-<template v-if="accounts.length">
-    <ul id="accounts">
-        <li v-for="(index, account) in accounts">
-        {{index + 1}}. 
-        <a @click.prevent="viewAccount(account)" href="">{{account.name}}</a> | 
-        [<a @click.prevent="deleteAccount(account)" href="">remove</a>]
-        </li>
-    </ul>
+<!--
+{{treeData | json}}
+-->
+
+<template v-if="treeData.children.length">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="treeview">
+                <ul id="accounts" class="list-group">
+                    <item class="item" :model="treeData" :open="true" :root="true" :level="0">
+                    </item>
+                </ul>
+            </div>
+        </div>
+    </div>
 </template>
 <template v-else>
     <p>No account has been created yet. Would you like to create one?</p>

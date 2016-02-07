@@ -1,14 +1,14 @@
-{"hidden":false,"placeholder":true,"active":true,"description":"Description","type":"INC","parent":"1","code":"","name":"Income","entity":"account","_id":"09puwhOTCsGflUec"}
-{"code":"","description":"","transaction_date":{"$$date":1454802320732},"posted_date":{"$$date":1454802320732},"debit":null,"credit":null,"transfer":3,"note":"","entity":"transaction","_id":"7KIgzHTv8l88mmIg"}
-{"code":"","description":"","transaction_date":{"$$date":1454802322284},"posted_date":{"$$date":1454802322284},"debit":null,"credit":null,"transfer":3,"note":"","entity":"transaction","_id":"7f5v7EyPDC9UXHa4"}
-{"name":"Utilities","code":"UTIL","type":"IN","parent":"ac-1","description":"","hidden":"","placeholder":"","active":true,"entity":"account","_id":"9O2Lz9YpG8x26epT"}
-{"active":true,"placeholder":true,"hidden":false,"name":"Expenses","code":"","entity":"account","_id":"P2uzz2awiluwJlfE","type":"EXP","description":""}
-{"name":"Utilities New","code":"UTIL","type":"IN","parent":"ac-2","description":"desc","hidden":"","placeholder":"","active":true,"entity":"account","_id":"Xr3dpcGsREKKHiCl"}
-{"code":"","description":"","transaction_date":{"$$date":1454802117383},"posted_date":{"$$date":1454802117383},"debit":null,"credit":null,"transfer":3,"note":"","entity":"transaction","_id":"fTavqH23uW34XZNh"}
-{"name":"Test","code":"","type":"","parent":"","description":"","hidden":"","placeholder":"","active":"","entity":"account","_id":"pVKjxYK9upoNu5cE"}
-{"name":"Liabilities","code":"UTIL","type":"LIA","parent":"ac-2","description":"","hidden":"","placeholder":true,"active":true,"entity":"account","_id":"Xr3dpcGsREKKHiCl"}
-{"name":"Liabilities","code":"","type":"LIA","parent":"ac-2","description":"","hidden":"","placeholder":true,"active":true,"entity":"account","_id":"Xr3dpcGsREKKHiCl"}
-{"hidden":false,"placeholder":true,"active":true,"description":"Description","type":"INC","parent":"1","code":"","name":"Income","entity":"account","_id":"09puwhOTCsGflUec"}
-{"active":true,"placeholder":true,"hidden":false,"name":"Expenses","code":"","entity":"account","_id":"P2uzz2awiluwJlfE","type":"EXP","description":""}
-{"name":"Assets","code":"","type":"ASSET","parent":"","description":"","hidden":"","placeholder":true,"active":true,"entity":"account","_id":"pVKjxYK9upoNu5cE"}
-{"name":"Utilities","code":"","type":"EXP","parent":"P2uzz2awiluwJlfE","description":"","hidden":"","placeholder":true,"active":true,"entity":"account","_id":"9O2Lz9YpG8x26epT"}
+{"name":"Expenses","code":"","type":"EXP","parent":"a","description":"","active":true,"placeholder":true,"entity":"account","path":"a.c","_id":"8OXcwbXReIFTwpUV"}
+{"name":"Liabilities","code":"","type":"LIA","parent":"a","description":"","active":true,"placeholder":true,"entity":"account","path":"a.d","_id":"A7vtYUuv5gQhvM4K"}
+{"code":"","description":"","transaction_date":{"$$date":1454815996924},"posted_date":{"$$date":1454815996924},"debit":null,"credit":null,"transfer":3,"note":"","entity":"transaction","_id":"GqxLmTYg8u6XiiGY"}
+{"code":"","description":"","transaction_date":{"$$date":1454816000374},"posted_date":{"$$date":1454816000374},"debit":null,"credit":null,"transfer":3,"note":"","entity":"transaction","_id":"K0MEwRDaKSlzuwjb"}
+{"name":"Assets","code":"","type":"ASSET","parent":"a","description":"","active":true,"placeholder":true,"entity":"account","path":"a.a","_id":"V0ZaK7ST0DCTUOv3"}
+{"code":"","description":"","transaction_date":{"$$date":1454815997745},"posted_date":{"$$date":1454815997745},"debit":null,"credit":null,"transfer":3,"note":"","entity":"transaction","_id":"bbOD0pv5b6JubOTX"}
+{"code":"","description":"","transaction_date":{"$$date":1454815994259},"posted_date":{"$$date":1454815994259},"debit":null,"credit":null,"transfer":3,"note":"","entity":"transaction","_id":"jCfvDnh9CjnxDlEf"}
+{"code":"","description":"","transaction_date":{"$$date":1454815995394},"posted_date":{"$$date":1454815995394},"debit":null,"credit":null,"transfer":3,"note":"","entity":"transaction","_id":"jJRxwZk0zrtr5UpV"}
+{"name":"Incomes","code":"","type":"INC","parent":"a","description":"","active":true,"placeholder":true,"entity":"account","path":"a.b","_id":"jNYQbnjRCcKrkDZE"}
+{"name":"Credit Cards","code":"","type":"CC","parent":"a.d","description":"","active":true,"placeholder":true,"entity":"account","path":"a.d.a","_id":"lVGIFkZY1cZTD0Wh"}
+{"code":"","description":"","transaction_date":{"$$date":1454815993695},"posted_date":{"$$date":1454815993695},"debit":null,"credit":null,"transfer":3,"note":"","entity":"transaction","_id":"rd3cTMexXyrzoFXd"}
+{"code":"","description":"","transaction_date":{"$$date":1454815999371},"posted_date":{"$$date":1454815999371},"debit":null,"credit":null,"transfer":3,"note":"","entity":"transaction","_id":"tZMcC90dPUeKGbbZ"}
+{"name":"Credit Cards","code":"","type":"CC","parent":"a","description":"","active":true,"placeholder":true,"entity":"account","path":"a.e","_id":"lVGIFkZY1cZTD0Wh"}
+{"name":"Credit Cards","code":"","type":"CC","parent":"a.d","description":"","active":true,"placeholder":true,"entity":"account","path":"a.d.a","_id":"lVGIFkZY1cZTD0Wh"}

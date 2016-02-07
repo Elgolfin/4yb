@@ -3,7 +3,7 @@
 
 ## 0.2.0 (Doing Now)
 
-* Put the foundation in place (forms, excel-like table editor, sqlite and/or mongodb, standalone web server, rest api, etc.)
+* Put the foundation in place (forms, transactions (excel-like table?) editor, sqlite and/or mongodb, standalone web server, rest api, etc.)
 * Add/Edit/Delete an account
 * List accounts
 * Add/Edit/Delete a transaction related to an account
