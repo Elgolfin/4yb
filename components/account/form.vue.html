@@ -1,95 +1,84 @@
-<div class="smart-wrap theme-black">
-        	<div class="smart-forms smart-container wrap-1">
-            
-              <div class="form-header header-primary header-black">
-                	<h4><i class="fa fa-new"></i>{{title}}</h4>
-              </div><!-- end .form-header section -->
-                
-                <form method="post" action="/" id="account">
-                	<div class="form-body">
-                    
-                     <!-- OUR FORM ELEMENTS WILL GO HERE -->                                                
-                    
-					<div class="frm-row">					
-						<div class="section colm colm9">
-							<label for="account-name" class="field-label">Account Name</label>
-							<label class="field">
-								<input v-model="account.name" type="text" name="account-label" class="gui-input" placeholder="Enter account name">
-							</label>
-						</div><!-- end section -->
-						
-						<div class="section colm colm3">
-							<label for="account-code" class="field-label">Account code</label>
-							<label class="field">
-								<input v-model="account.code" type="text" name="account-code" class="gui-input" placeholder="Enter account code">
-							</label>
-						</div><!-- end section -->
-					 </div> 
-					
-					<div class="frm-row">
-						<div class="section colm colm4">
-							<label class="field select">
-								<select v-model="account.type" id="type" name="type">
-									<option value="">Account type </option>
-									<option value="EX">Expense</option>
-									<option value="IN">Income</option>
-								</select>
-								<i class="arrow"></i>                    
-							</label>  
-						</div><!-- end section -->
-					
-						<div class="section colm colm8">
-							<label class="field select">
-								<select v-model="account.parent" id="parent" name="parent">
-									<option value="">Parent account</option>
-									<option value="ac-1">Account 1</option>
-									<option value="ac-2">Account 2</option>
-								</select>
-								<i class="arrow"></i>                    
-							</label>  
-						</div><!-- end section -->
-					</div>
-					 
-					<div class="section">
-						<label for="account-desc" class="field-label">Account description</label>
-						<label class="field">
-							<textarea v-model="account.description" class="gui-textarea" name="account-desc" id="account-desc" placeholder="Enter account description"></textarea>   
-						</label>
-					</div><!-- end section --> 
-					
-					
-					
-					<div class="section">
-						<div class="option-group field">
-						
-							<label class="switch">
-								<input v-model="account.active" type="checkbox" name="switch1" id="switch1" value="switch1">
-								<span class="switch-label" data-on="ON" data-off="OFF"></span>
-								<span> Active </span>
-							</label>
-												
-							<label class="switch">
-								<input v-model="account.placeholder" type="checkbox" name="switch2" id="switch2" value="switch2">
-								<span class="switch-label" data-on="ON" data-off="OFF"></span>
-								<span> Placeholder </span>
-							</label>
-												
-							<label class="switch">
-								<input v-model="account.hidden" type="checkbox" name="switch2" id="switch2" value="switch2">
-								<span class="switch-label" data-on="ON" data-off="OFF"></span>
-								<span> Hidden </span>
-							</label>
-									
-						</div><!-- end .option-group section -->
-					</div><!-- end section -->
-					 
-					 
-                    </div><!-- end .form-body section -->
-                    <div class="form-footer">
-                    	<button @click.prevent="updateAccount" type="submit" class="button btn-primary btn-black">Save Account</button>
-                    </div><!-- end .form-footer section -->
-                    
-                </form>
-                
-            </div><!-- end .smart-forms section -->
-        </div><!-- end .smart-wrap section -->
+<h2>{{title}}</h2>
+
+<form method="post" action="/" id="account">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="account-name">Account Name</label>
+                <input type="text" class="form-control" id="account-name" v-model="account.name" placeholder="Account Name">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="account-code">Code</label>
+                <input type="text" class="form-control" id="account-code" v-model="account.code" placeholder="Account Code">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="type">Account Type</label>
+                <select class="form-control" v-model="account.type" id="type" name="type">
+                    <option value="BANK">Bank</option>
+                    <option value="ASSET">Asset</option>
+                    <option value="CASH">Cash</option>
+                    <option value="CC">Credit Card</option>
+                    <option value="EXP">Expense</option>
+                    <option value="INC">Income</option>
+                    <option value="LIA">Liabilities</option>
+                </select> 
+            </div> 
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="parent">Parent Account</label>
+                <select class="form-control" v-model="account.parent" id="parent" name="parent">
+                    <option v-for="option in accounts" :value="option._id">
+                        {{ option.name }}
+                    </option>
+                </select> 
+            </div> 
+        </div>       
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="account-desc" class="field-label">Account description</label>
+                <textarea v-model="account.description" rows="4" class="form-control" name="account-desc" id="account-desc" placeholder="Enter account description"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-control">
+                <label>
+                    <input v-model="account.active" type="checkbox" value="">
+                    Active
+                </label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-control">
+                <label>
+                    <input v-model="account.placeholder" type="checkbox" value="">
+                    Placeholder
+                </label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-control">
+                <label>
+                    <input v-model="account.hidden" type="checkbox" value="">
+                    Hidden
+                </label>
+            </div>
+        </div>                    
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <br />
+            <button @click.prevent="updateAccount" type="submit" class="btn btn-primary">Save Account</button>
+        </div>
+    </div>
+</form>

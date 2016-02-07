@@ -7,7 +7,8 @@ exports.formAccount = Vue.component('comp-4yb-form-account', {
     data: function () {
         return { 
             title: "Add an Account",
-            account: {name: "", code: "", type:"", parent:"", description: "", hidden:"", placeholder:"", active:""}
+            account: {name: "", code: "", type:"", parent:"", description: "", hidden:"", placeholder:"", active:""},
+            accounts: null
          }
     },
     template: jetpack.read('./components/account/form.vue.html'),
@@ -43,6 +44,12 @@ exports.formAccount = Vue.component('comp-4yb-form-account', {
         var self = this;
         this.account = this.$root.viewData;
         done();
+    },
+    created: function (done) {
+        var vm = this;
+        db_4yb.find({entity: 'account'}).sort({ name: 1 }).exec(function (err, docs) {
+            vm.accounts = JSON.parse(JSON.stringify(docs));
+        });
     },
     events: {
         'test': function (account) {

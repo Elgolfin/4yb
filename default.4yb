@@ -1,6 +1,14 @@
+{"hidden":false,"placeholder":true,"active":true,"description":"Description","type":"INC","parent":"1","code":"","name":"Income","entity":"account","_id":"09puwhOTCsGflUec"}
+{"code":"","description":"","transaction_date":{"$$date":1454802320732},"posted_date":{"$$date":1454802320732},"debit":null,"credit":null,"transfer":3,"note":"","entity":"transaction","_id":"7KIgzHTv8l88mmIg"}
+{"code":"","description":"","transaction_date":{"$$date":1454802322284},"posted_date":{"$$date":1454802322284},"debit":null,"credit":null,"transfer":3,"note":"","entity":"transaction","_id":"7f5v7EyPDC9UXHa4"}
 {"name":"Utilities","code":"UTIL","type":"IN","parent":"ac-1","description":"","hidden":"","placeholder":"","active":true,"entity":"account","_id":"9O2Lz9YpG8x26epT"}
-{"code":"WER","description":"Desc with note","transaction_date":"2016-02-01","posted_date":"2016-02-01","debit":null,"credit":"1000","transfer":"2","note":"My note","entity":"transaction","_id":"PzugYZoDliOqh3FP"}
+{"active":true,"placeholder":true,"hidden":false,"name":"Expenses","code":"","entity":"account","_id":"P2uzz2awiluwJlfE","type":"EXP","description":""}
 {"name":"Utilities New","code":"UTIL","type":"IN","parent":"ac-2","description":"desc","hidden":"","placeholder":"","active":true,"entity":"account","_id":"Xr3dpcGsREKKHiCl"}
-{"code":"","description":"","transaction_date":"2015-12-04","posted_date":"2015-12-07","debit":"100","credit":null,"transfer":3,"note":"","entity":"transaction","_id":"YTqZHFsWnbFGDnbw"}
+{"code":"","description":"","transaction_date":{"$$date":1454802117383},"posted_date":{"$$date":1454802117383},"debit":null,"credit":null,"transfer":3,"note":"","entity":"transaction","_id":"fTavqH23uW34XZNh"}
 {"name":"Test","code":"","type":"","parent":"","description":"","hidden":"","placeholder":"","active":"","entity":"account","_id":"pVKjxYK9upoNu5cE"}
-{"code":"ABZ","description":"Desc without node","transaction_date":"2015-11-12","posted_date":"2015-11-13","debit":"99.99","credit":"","transfer":"5","note":"","entity":"transaction","_id":"paJ2hJid454vRTJd"}
+{"name":"Liabilities","code":"UTIL","type":"LIA","parent":"ac-2","description":"","hidden":"","placeholder":true,"active":true,"entity":"account","_id":"Xr3dpcGsREKKHiCl"}
+{"name":"Liabilities","code":"","type":"LIA","parent":"ac-2","description":"","hidden":"","placeholder":true,"active":true,"entity":"account","_id":"Xr3dpcGsREKKHiCl"}
+{"hidden":false,"placeholder":true,"active":true,"description":"Description","type":"INC","parent":"1","code":"","name":"Income","entity":"account","_id":"09puwhOTCsGflUec"}
+{"active":true,"placeholder":true,"hidden":false,"name":"Expenses","code":"","entity":"account","_id":"P2uzz2awiluwJlfE","type":"EXP","description":""}
+{"name":"Assets","code":"","type":"ASSET","parent":"","description":"","hidden":"","placeholder":true,"active":true,"entity":"account","_id":"pVKjxYK9upoNu5cE"}
+{"name":"Utilities","code":"","type":"EXP","parent":"P2uzz2awiluwJlfE","description":"","hidden":"","placeholder":true,"active":true,"entity":"account","_id":"9O2Lz9YpG8x26epT"}
