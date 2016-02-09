@@ -1,4 +1,85 @@
-{{title}}
+<hr />
+
+<form>
+    <div class="row">
+        <div class="col-md-1">
+            <div class="form-group">
+                <label for="transaction_code">Code</label>
+                <input type="text" class="form-control" id="transaction_code" v-model="transaction.code" placeholder="Code">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="transaction_description">Description</label>
+                <input type="text" class="form-control" id="transaction_description" v-model="transaction.description" placeholder="Description">
+            </div>                          
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="transaction_credit">Transfer Account</label>
+                <select id="transaction_transfer_account" v-model="transaction.transfer" class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="transaction_date">Transaction Date</label>
+                <input type="date" class="form-control" id="transaction_date" v-model="transaction.transaction_date" placeholder="Transaction Date">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="posted_date">Posted Date</label>
+                <input type="date" class="form-control" id="posted_date" v-model="transaction.posted_date" placeholder="Posted Date">
+            </div>
+        </div>
+        
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="transaction_credit">Credit</label>
+                <div class="input-group">
+                <div class="input-group-addon">$</div>
+                    <input type="text" class="form-control" id="transaction_credit" v-model="transaction.credit" placeholder="Credit">
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="transaction_debit">Debit</label>
+                <div class="input-group">
+                <div class="input-group-addon">$</div>
+                    <input type="text" class="form-control" id="transaction_debit" v-model="transaction.debit" placeholder="Debit">
+                </div>
+            </div>
+        </div>
+        
+    </div>
+  
+    <div class="row">
+        
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="transaction_note">Note</label>
+                <textarea rows="3" class="form-control" id="transaction_note" v-model="transaction.note" placeholder="Note"></textarea>
+            </div>
+        </div>
+        
+    </div>
+        
+    <button @click.prevent="insertTransaction" type="submit" class="btn btn-primary">Add Transaction</button>
+  
+</form>
+
+<hr />
 
 <template v-if="data.length > 0">
     
@@ -84,71 +165,3 @@
         <p class="bg-info">No transaction has been recorded for this account yet.</p>
     </div>
 </template>
-
-<hr />
-
-<form class="form-inline">
-  
-    <div class="form-group">
-        <label for="transaction_code">Code</label>
-        <input type="text" class="form-control" id="transaction_code" v-model="transaction.code" placeholder="Code">
-    </div>
-  
-    <div class="form-group">
-        <label for="transaction_description">Description</label>
-        <input type="text" class="form-control" id="transaction_description" v-model="transaction.description" placeholder="Description">
-    </div>
-    
-    <br />
-    
-    <div class="form-group">
-        <label for="transaction_date">Transaction Date</label>
-        <input type="date" class="form-control" id="transaction_date" v-model="transaction.transaction_date" placeholder="Transaction Date">
-    </div>
-  
-  
-    <div class="form-group">
-        <label for="posted_date">Posted Date</label>
-        <input type="date" class="form-control" id="posted_date" v-model="transaction.posted_date" placeholder="Posted Date">
-    </div>
-    
-    <br />
-    
-    <div class="form-group">
-        <label class="sr-only" for="transaction_credit">Transfer Account</label>
-        <select id="transaction_transfer_account" v-model="transaction.transfer" class="form-control">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-        </select>
-    </div>
-  
-    <div class="form-group">
-        <label class="sr-only" for="transaction_credit">Credit</label>
-        <div class="input-group">
-        <div class="input-group-addon">$</div>
-            <input type="text" class="form-control" id="transaction_credit" v-model="transaction.credit" placeholder="Credit">
-        </div>
-    </div>
-  
-    <div class="form-group">
-        <label class="sr-only" for="transaction_debit">Debit</label>
-        <div class="input-group">
-        <div class="input-group-addon">$</div>
-            <input type="text" class="form-control" id="transaction_debit" v-model="transaction.debit" placeholder="Debit">
-        </div>
-    </div>
-    
-    <br />
-  
-    <div class="form-group">
-        <label for="transaction_note"></label>
-        <input type="textarea" class="form-control" id="transaction_note" v-model="transaction.note" placeholder="Note">
-    </div>
-    
-    <br />
-  
-    <button @click.prevent="insertTransaction" type="submit" class="btn btn-primary">Add Transaction</button>
-</form>
