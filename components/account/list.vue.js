@@ -15,20 +15,7 @@ exports.ListAccounts = Vue.component('comp-4yb-list-accounts', {
     },
     template: jetpack.read('./components/account/list.vue.html'),
     methods: {
-        deleteAccount: function (account) {
-            console.log("delete account: " + account._id);
-            var vm = this;
-            db_4yb.remove({ _id: account._id }, {}, function (err, numRemoved) {
-                vm.accounts.$remove(account);
-            });
-        },
-        viewAccount: function (account) {
-            console.log("view account: " + account._id);
-            console.log(account);
-            var vm = this;
-            this.$root.currentView = "comp4ybFormAccount";
-            this.$root.viewData = account;
-        }
+        
     },
     created: function () {
         var vm = this;
@@ -99,6 +86,13 @@ exports.item = Vue.component('item', {
             var vm = this;
             this.$root.currentView = "comp4ybFormAccount";
             this.$root.viewData = {action: 'add', account: account};
+        },
+        openTransactions: function (account) {
+            console.log("open account transactions: " + account._id);
+            console.log(account);
+            var vm = this;
+            this.$root.currentView = "comp4ybTransactions";
+            this.$root.viewData = account;
         }
     }
 })

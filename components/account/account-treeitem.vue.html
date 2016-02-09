@@ -39,11 +39,14 @@
     </template>
     <template v-else>
         <a @click.prevent="viewAccount(model.account)" href="">{{model.account.name}} / {{model.account.path}}</a>
+        <button @click.prevent="openTransactions(model.account)" class="btn btn-default btn-xs" style="display:inline-block; position: absolute; right: 70px;">
+            <span class="glyphicon glyphicon-calendar" style="color:#007a00"></span>
+        </button>
         <button @click.prevent="addAccount(model.account)" class="btn btn-default btn-xs" style="display:inline-block; position: absolute; right: 40px;">
             <span class="glyphicon glyphicon-plus" style="color:#007acc"></span>
         </button>
         <button @click.prevent="deleteAccount(model.account)" class="btn btn-default btn-xs" style="display:inline-block; position: absolute; right: 10px;">
-            <span class="glyphicon glyphicon-remove" style="color:#700"></span>
+            <span class="glyphicon glyphicon-remove" style="color:#7a0000"></span>
         </button>
     </template>      
 </li>

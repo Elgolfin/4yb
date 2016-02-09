@@ -18,11 +18,9 @@
             <div class="form-group">
                 <label for="transaction_credit">Transfer Account</label>
                 <select id="transaction_transfer_account" v-model="transaction.transfer" class="form-control">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    <option v-for="option in accounts" :value="option">
+                        {{ option.name }} / {{option.path}}
+                    </option>
                 </select>
             </div>
         </div>

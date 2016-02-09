@@ -1,3 +1,4 @@
+/* global db_4yb */
 const app = require('remote').require('app');
 const jetpack = require('fs-jetpack').cwd(app.getAppPath());
 var Vue = require('vue');
@@ -10,7 +11,8 @@ exports.main = Vue.extend({
             title: 'Transactions',
             searchQuery: '',
             gridColumns: ['delete', 'code', 'description', 'posted_date', 'transaction_date', 'credit', 'debit', 'transfer', 'balance', 'save'],
-            gridData: ''
+            gridData: '',
+            currentAccount: null
         }
     }
     ,template: jetpack.read('./components/transactions/main.vue.html')
@@ -26,7 +28,8 @@ exports.main = Vue.extend({
     },
     created: function () {
         var vm = this;
-        db_4yb.find({entity: 'transaction'}).sort({ posted_date: 1 }).exec(function (err, docs) {
+        this.currentAccount = vm.$root.viewData
+        db_4yb.find({entity: 'transaction', transfer: this.currentAccount.path}).sort({ posted_date: 1 }).exec(function (err, docs) {
             vm.gridData = JSON.parse(JSON.stringify(docs));
         });
     }
@@ -42,7 +45,8 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
     },
     data: function () {
         return {
-            transaction: {code: "", description: "", transaction_date: new Date(), posted_date: new Date(), debit: null, credit: null, transfer: 3, note: ""}
+            accounts: null,
+            transaction: {code: "", description: "", _group: "", transaction_date: new Date(), posted_date: new Date(), debit: null, credit: null, transfer: 3, note: ""}
         }
     },
     computed: {
@@ -70,31 +74,51 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
     methods: {
         insertTransaction: function () {
             console.log(this.transaction);
-            //console.log(this.transaction.posted_date);
-            this.transaction.entity = "transaction";
-            var vm = this;
-            db_4yb.insert(this.transaction, function (err, newDoc) {
-                /*vm.transaction = {code: "", description: "", transaction_date: new Date(), posted_date: new Date(), debit: null, credit: null, transfer: 3, note: ""};
-                vm.data.push(JSON.parse(JSON.stringify(newDoc)));
-                document.getElementById("transaction_code").focus();
-                */
-                vm.$root.currentView = "comp1";
-            });
+            
+            if (this.$parent.currentAccount !== null) {
+            
+                var vm = this;
+                var transactionTransfer = JSON.parse(JSON.stringify(this.transaction.transfer));
+                console.log(transactionTransfer);
+                
+                this.transaction.entity = "transaction";
+                this.transaction._id = db_4yb.createNewId();
+                this.transaction._group = this.transaction._id;
+                this.transaction.transfer = transactionTransfer.path;
+                
+                var twinTransaction = JSON.parse(JSON.stringify(this.transaction));
+                var twinId = db_4yb.createNewId();
+                while (twinId == this.transaction._id) {
+                    twinId = db_4yb.createNewId();
+                }
+                twinTransaction._id = twinId;
+                twinTransaction.transfer = this.$parent.currentAccount.path;
+                
+                // TODO : make it work for all kind of twin account (i.e. bank to credit card, debit becomes credit)
+                // to do so, use the type account of this.$parent.currentAccount and transactionTransfer
+                
+                db_4yb.insert([this.transaction, twinTransaction], function (err, newDoc) {
+                    /*vm.transaction = {code: "", description: "", transaction_date: new Date(), posted_date: new Date(), debit: null, credit: null, transfer: 3, note: ""};
+                    vm.data.push(JSON.parse(JSON.stringify(newDoc)));
+                    document.getElementById("transaction_code").focus();
+                    */
+                    vm.$root.currentView = "comp1";
+                });
+                
+            }
             
         },
         deleteTransaction: function (transaction) {
             console.log(transaction);
             var vm = this;
-            db_4yb.remove({ _id: transaction._id }, {}, function (err, numRemoved) {
-                /*console.log(err);
+            db_4yb.remove({ _group: transaction._group }, { multi: true }, function (err, numRemoved) {
+                console.log(err);
                 console.log(numRemoved);
-                vm.data.$remove(transaction);*/
+                /*vm.data.$remove(transaction);*/
                 vm.$root.currentView = "comp1";
             });
             
         }
-            
- 
     }
     ,filters: {
         formatDate: function (date) {
@@ -117,5 +141,13 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
     }
     ,ready: function(){
         document.getElementById("transaction_code").focus();
+    }
+    ,activate: function (done){
+        console.log(this.account);
+        var vm = this;
+        db_4yb.find({entity: 'account', path: { $ne: vm.$parent.currentAccount.path }}).sort({ name: 1 }).exec(function (err, docs) {
+            vm.accounts = JSON.parse(JSON.stringify(docs));
+        });
+        done();
     }
 });
