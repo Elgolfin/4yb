@@ -32,19 +32,17 @@ exports.ListAccounts = Vue.component('comp-4yb-list-accounts', {
     },
     created: function () {
         var vm = this;
-        // , path: { $regex: /^a\.[a-z]+$/ }
-        db_4yb.find({entity: 'account' }).sort({ name: 1 }).exec(function (err, docs) {
-            //vm.accounts = JSON.parse(JSON.stringify(docs));
-            vm.treeData = {
-                account: {name: "Accounts", path: "a"}, 
-                children: alphabet.buildTree("a", JSON.parse(JSON.stringify(docs)))
+        db_4yb.find({entity: /account/ }).sort({ name: 1 }).exec(function (err, docs) { // WORKS
+        //db_4yb.find({ entity: /account/ }, function (err, docs) { //  WORKS
+        //db_4yb.find({ entity: { $regex: /ar/} }, function (err, docs) {
+            if (!err) {
+                vm.treeData = {
+                    account: {name: "Accounts", path: "a"}, 
+                    children: alphabet.buildTree("a", JSON.parse(JSON.stringify(docs)))
+                }
+            } else {
+                console.log(err);
             }
-            /*
-            vm.treeData = {
-                name: 'My Accounts', 
-                children: JSON.parse(JSON.stringify(docs))
-            }
-            */
         });
     },
     ready: function() {

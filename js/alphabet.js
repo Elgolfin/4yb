@@ -17,6 +17,5 @@ exports.alphabet = {
             }
         });
         return ret;
-        
     }
 }

@@ -121,24 +121,19 @@ app.on('ready', function() {
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
-        console.log("Closing 1");
         mainWindow = null;
         app.Quit();
     });
 });
 
 const jetpack = require('fs-jetpack').cwd(app.getAppPath())
-var Datastore = require('nedb');
 global.filepath = 'default.4yb';
-global.db_4yb = new Datastore({ filename: global.openedFile, autoload: true });
 var showOpen = function() {
 	dialog.showOpenDialog({ properties: [ 'openFile'], filters: [{ name: '4yb', extensions: ['4yb', 'json'] }]}, function(filenames){
         if (filenames === undefined) return;
         var filename = filenames[0];
         console.log("Opening file... " + filename);
         global.filepath = filename
-        console.log("Global variable has been set: " + global.filepath);
-        global.db_4yb = new Datastore({ filename: global.filepath, autoload: true })
         // Refresh the application to use the new file
         mainWindow.loadURL('file://' + __dirname + '/app.html');
     });

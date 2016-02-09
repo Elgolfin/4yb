@@ -16,9 +16,10 @@ const jetpack = require('fs-jetpack').cwd(app.getAppPath())
 //console.log(jetpack.read('package.json', 'json'))
 
 const Vue = require('vue');
-
-var db_4yb = require('remote').getGlobal('db_4yb');
+const Datastore = require('nedb');
+ 
 var db_4yb_filepath = require('remote').getGlobal('filepath');
+var db_4yb = new Datastore({ filename: db_4yb_filepath, autoload: true });
 
 // Load all components
 var sidebar = require('./components/shell/sidebar.vue.js').sidebar;
