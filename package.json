@@ -14,7 +14,8 @@
     "electron-prebuilt": "^0.36.6"
   },
   "scripts": {
-      "start": "electron ."
+      "start": "electron .",
+      "test": "mocha -R list"
   },
   "main": "main.js"
 }
