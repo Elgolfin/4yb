@@ -2,6 +2,7 @@
   "name": "4yb",
   "version": "0.1.0",
   "dependencies": {
+    "bluebird": "^3.3.1",
     "chart.js": "^1.0.2",
     "fs-jetpack": "^0.7.1",
     "nedb": "^1.7.2",

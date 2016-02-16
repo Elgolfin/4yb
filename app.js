@@ -8,8 +8,10 @@
 
 // Node.js modules and those from npm
 // are required the same way as always.
-const app = require('remote').require('app')
-const jetpack = require('fs-jetpack').cwd(app.getAppPath())
+const app = require('remote').require('app');
+const jetpack = require('fs-jetpack').cwd(app.getAppPath());
+const promis = require('bluebird');
+const PromiseDatastore = require('./js/nedb.promises.js').PromiseDatastore;
 
 // Holy crap! This is browser window with HTML and stuff, but I can read
 // here files like it is node.js! Welcome to Electron world :)
@@ -17,9 +19,17 @@ const jetpack = require('fs-jetpack').cwd(app.getAppPath())
 
 const Vue = require('vue');
 const Datastore = require('nedb');
- 
 var db_4yb_filepath = require('remote').getGlobal('filepath');
-var db_4yb = new Datastore({ filename: db_4yb_filepath, autoload: true });
+
+promis.promisifyAll(Datastore.prototype);
+var db_4yb = new PromiseDatastore({ filename: "db_4yb_filepath", autoload: true });
+db_4yb.cfind({entity: /account/ }).sort({name: 1}).execAsync()
+    .then(function(docs){
+        console.log(docs)
+    })
+    .catch(function (err) {
+        console.log(err);
+});
 
 // Load all components
 var sidebar = require('./components/shell/sidebar.vue.js').sidebar;
