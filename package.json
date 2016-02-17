@@ -17,8 +17,8 @@
   },
   "scripts": {
     "start": "electron .",
-    "test": "mocha -R list",
-    "testdev": "mocha -w"
+    "test": "mocha -R list"/*,
+    "testdev": "mocha -w"*/
   },
   "main": "main.js"
 }
