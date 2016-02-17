@@ -21,15 +21,15 @@ const Vue = require('vue');
 const Datastore = require('nedb');
 var db_4yb_filepath = require('remote').getGlobal('filepath');
 
-promis.promisifyAll(Datastore.prototype);
-var db_4yb = new PromiseDatastore({ filename: "db_4yb_filepath", autoload: true });
-db_4yb.cfind({entity: /account/ }).sort({name: 1}).execAsync()
+var db_4yb = new PromiseDatastore({ filename: db_4yb_filepath, autoload: true });
+db_4yb.findAsync({entity: /account/ }).sort({name: 1}).execAsync()
     .then(function(docs){
         console.log(docs)
     })
     .catch(function (err) {
         console.log(err);
 });
+
 
 // Load all components
 var sidebar = require('./components/shell/sidebar.vue.js').sidebar;
