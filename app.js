@@ -11,17 +11,19 @@
 const app = require('remote').require('app');
 const jetpack = require('fs-jetpack').cwd(app.getAppPath());
 const promis = require('bluebird');
-const PromiseDatastore = require('./js/nedb.promises.js').PromiseDatastore;
-
+const db_4yb_filepath = require('remote').getGlobal('filepath');
+//const PromiseDatastore = require('./js/nedb.promises.js').PromiseDatastore;
+const Db4yb = require('./js/4yb-database.js').Db4yb;
+const db_4yb = new Db4yb().load(db_4yb_filepath).Datastore;
 // Holy crap! This is browser window with HTML and stuff, but I can read
 // here files like it is node.js! Welcome to Electron world :)
 //console.log(jetpack.read('package.json', 'json'))
 
 const Vue = require('vue');
 const Datastore = require('nedb');
-var db_4yb_filepath = require('remote').getGlobal('filepath');
 
-var db_4yb = new PromiseDatastore({ filename: db_4yb_filepath, autoload: true });
+//var db_4yb = new PromiseDatastore({ filename: db_4yb_filepath, autoload: true });
+//ar db_4yb = Db4yb.load(db_4yb_filepath).get();
 db_4yb.findAsync({entity: /account/ }).sort({name: 1}).execAsync()
     .then(function(docs){
         console.log(docs)

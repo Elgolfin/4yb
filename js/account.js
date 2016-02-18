@@ -1,24 +1,23 @@
-/* global db_4yb */ 
+/* global db_4yb */
 "use strict";
 const alphabet = require('./alphabet.js').alphabet;
-const PromiseDatastore = require('./nedb.promises.js').PromiseDatastore;
-const db = new PromiseDatastore({ filename: "test.db.json", autoload: true });
 
-let Account = exports.Account = function() {
-    this._id = "";
-    this.name = "";
-    this.code = "";
-    this.type = "";
-    this.path = "";
-    this.parent = "";
-    this.description = "";
-    this.hidden = "";
-    this.placeholder = "";
-    this.active = "";
+let Account = exports.Account = function (db) {
+    this.db = db;
+    this._id = null;
+    this.name = null;
+    this.code = null;
+    this.type = null;
+    this.path = null;
+    this.parent = null;
+    this.description = null;
+    this.hidden = null;
+    this.placeholder = null;
+    this.active = null;
 }
 
-Account.prototype.save = function() {
-    var callback = function(){}, currentPath;
+Account.prototype.save = function () {
+    var callback = function () { }, currentPath;
     var numArgs = arguments.length;
     if (numArgs == 1) {
         callback = arguments[0];
@@ -27,37 +26,36 @@ Account.prototype.save = function() {
         currentPath = arguments[0];
         callback = arguments[1];
     }
-    if (this.parent !== undefined && this.parent.length > 0) {
-        let account = this;
-        db.findAsync({parent: account.parent}).sort({ path: -1 }).execAsync().then(function(docs) {
-            if (alphabet.getParentPath(currentPath) != account.parent) {
-                if (docs.length > 0) {
-                    account.path = alphabet.getNextEntry(docs[0].path);
-                } else {
-                    account.path = account.parent + ".a";
-                }
-            }
-            saveAccount(account, callback);
-        })
-        /*.catch(function (err) {
-            console.log(err);
-        })*/;
-    } else {
-        this._id = db.createNewId();
-        this.parent = "a";
-        saveAccount(this, callback);       
-    }
-}
-
-Account.prototype.delete = function() {
     
+    if (!this.parent) {
+        this.parent = 'a';
+    }
+    if (!this._id) {
+        this._id = this.db.createNewId();
+    }
+    
+    let account = this;
+    this.db.findAsync({ entity: "account", parent: account.parent }).sort({ path: -1 }).execAsync().then(function (docs) {
+        if (alphabet.getParentPath(currentPath) != account.parent) {
+            if (docs.length > 0) {
+                account.path = alphabet.getNextEntry(docs[0].path);
+            } else {
+                account.path = account.parent + ".a";
+            }
+        }
+        saveAccount(account, callback);
+    });
 }
 
-Account.prototype.add = function(callback) {
-    return Account.prototype.add(callback);
+Account.prototype.delete = function () {
+
 }
 
-Account.prototype.setName = function(name) {
+Account.prototype.add = function (callback) {
+    return Account.prototype.save(callback);
+}
+
+Account.prototype.setName = function (name) {
     this.name = name;
     return this;
 }
@@ -78,7 +76,7 @@ Account.prototype.load = function (account) {
 
 Account.prototype.get = function (id, callback) {
     let account = this;
-    db.findOneAsync({_id: id}).execAsync().then(function(doc) {
+    this.db.findOneAsync({ _id: id }).execAsync().then(function (doc) {
         if (doc !== null) {
             account.load(doc);
         }
@@ -86,8 +84,26 @@ Account.prototype.get = function (id, callback) {
     });
 }
 
+Account.prototype.JSONify = function () {
+    return {
+        _id: this._id,
+        name: this.name,
+        code: this.code,
+        type: this.type,
+        path: this.path,
+        parent: this.parent,
+        description: this.description,
+        hidden: this.hidden,
+        placeholder: this.placeholder,
+        active: this.active,
+        entity: "account"
+    }
+}
+
 function saveAccount(account, callback) {
-    db.update({ _id: account._id }, account, {upsert: true}, function (err, numReplaced) {
+    const accountToBeSaved = account.JSONify();
+    account.db.update({ _id: account._id }, accountToBeSaved, { upsert: true }, function (err, numReplaced) {
+        if (err) { throw err; }
         callback();
     });
 }
