@@ -4,9 +4,12 @@
 ## 0.2.0 (Doing Now)
 
 * Put the foundation in place (forms, transactions (excel-like table?) editor, sqlite and/or mongodb, standalone web server, rest api, etc.)
-* Add/Edit/Delete an account
-* List accounts
-* Add/Edit/Delete a transaction related to an account
+* ~~Add/Edit/Delete an account~~
+* ~~List accounts~~
+* ~~Add~~/Edit/~~Delete a transaction related to an account~~
+*  type ahead when entering a new transaction (to search a same transaction type in the bd)
+* add the location of a transaction (city, state/province, country)
+* ~~auto backup the file evcery n seconds (n will be configurable)~~
 
 ## 0.4.0
 

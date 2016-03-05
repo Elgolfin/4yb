@@ -70,7 +70,14 @@ var mainVM = new Vue({
         comp4ybTransactions: transactions.main
     },
     methods: {
-        
+        saveBackup: function () {
+            console.log("Automatic backup");
+            jetpack.copy(db_4yb_filepath, db_4yb_filepath + '.bak', { overwrite: true });
+            setTimeout(this.$root.saveBackup, 10000);
+        }
     },
-    mixins: [mixin]
+    mixins: [mixin],
+    ready: function () {
+        setTimeout(this.saveBackup, 10000);
+    }
 });
