@@ -110,7 +110,7 @@
                 </template>
                 <template v-if="key == 'description'">
                     <template v-if="data[idxT].note.length > 0">
-                        <a @click.prevent="deleteTransaction(entry)" href="">{{ entry[key] }}</a>
+                        <a @click.prevent="editTransaction(entry)" href="">{{ entry[key] }}</a>
                         / {{data[idxT].note}}
                         <!-- le lien avec la note disparait quand on filtre, l'index change!-->
                     </template>

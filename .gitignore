@@ -29,3 +29,4 @@ node_modules
 
 planets.json
 test.js
+*.bak
