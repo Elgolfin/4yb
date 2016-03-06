@@ -9,3 +9,4 @@
 {"name":"Incomes","code":"","type":"INC","parent":"a","description":"","active":true,"placeholder":true,"entity":"account","path":"a.b","_id":"jNYQbnjRCcKrkDZE"}
 {"name":"Credit Cards","code":"","type":"CC","parent":"a.d","description":"","active":true,"placeholder":true,"entity":"account","path":"a.d.a","_id":"lVGIFkZY1cZTD0Wh"}
 {"code":"c","description":"d","_group":"mtmbg5cnIGIdWuAo","transaction_date":"2016-02-01","posted_date":"2016-02-02","debit":"45","credit":"","transfer":"a.c","note":"","entity":"transaction","_id":"mtmbg5cnIGIdWuAo"}
+{"name":"Utilities","code":"","type":"EXP","path":"a.c.a","parent":"a.c","description":"","hidden":"","placeholder":true,"active":true,"entity":"account","_id":"qSeJl7uQeSumIgVv","createdAt":{"$$date":1456366683795},"updatedAt":{"$$date":1456366683795}}

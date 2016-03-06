@@ -17,8 +17,8 @@ let Account = exports.Account = function (db) {
 }
 
 Account.prototype.save = function () {
-    var callback = function () { }, currentPath;
-    var numArgs = arguments.length;
+    let callback = function () { }, currentPath;
+    let numArgs = arguments.length;
     if (numArgs == 1) {
         callback = arguments[0];
     }

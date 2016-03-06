@@ -2,6 +2,7 @@
 const app = require('remote').require('app');
 const jetpack = require('fs-jetpack').cwd(app.getAppPath());
 const alphabet = require('../../js/alphabet.js').alphabet;
+const Account = require('../../js/account.js').Account;
 var Vue = require('vue');
 
 //exports.formAccount = new Vue({
