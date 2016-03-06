@@ -10,7 +10,7 @@ exports.main = Vue.extend({
         return {
             title: 'Transactions',
             searchQuery: '',
-            gridColumns: ['delete', 'code', 'description', 'posted_date', 'transaction_date', 'credit', 'debit', 'transfer', 'balance', 'save'],
+            gridColumns: ['delete', 'code', 'description', 'posted_date', 'transaction_date', 'credit', 'debit', 'balance', 'save'],
             gridData: '',
             currentAccount: null
         }
