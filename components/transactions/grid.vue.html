@@ -1,5 +1,13 @@
 <hr />
 
+<h1>{{action | capitalize}} transaction</h1>
+<!--
+<h2>Transaction</h2>
+{{transaction | json}}
+
+<h2>Twin Transaction</h2>
+{{twinTransaction | json}}
+-->
 <form>
     <div class="row">
         <div class="col-md-1">
@@ -73,8 +81,10 @@
         
     </div>
         
-    <button @click.prevent="insertTransaction" type="submit" class="btn btn-primary">Add Transaction</button>
-  
+    <button @click.prevent="insertTransaction" type="submit" class="btn btn-primary" v-if='action == "add"'>Add Transaction</button>
+    <button @click.prevent="saveTransaction" type="submit" class="btn btn-primary" v-if='action == "update"'>Save Transaction</button>
+    <button @click.prevent="cancelTransaction" type="submit" class="btn btn-primary">Cancel</button>
+    
 </form>
 
 <hr />
@@ -103,16 +113,11 @@
                 </template>
                 <template v-if="key == 'credit' || key == 'debit'">
                     {{ entry[key] | currency }}
-                    <!--div class="input-group">
-                        <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control" v-model="entry[key]">
-                    </div-->
                 </template>
                 <template v-if="key == 'description'">
                     <template v-if="data[idxT].note.length > 0">
                         <a @click.prevent="editTransaction(entry)" href="">{{ entry[key] }}</a>
                         / {{data[idxT].note}}
-                        <!-- le lien avec la note disparait quand on filtre, l'index change!-->
                     </template>
                     <template v-else>
                         {{ entry[key] }}
