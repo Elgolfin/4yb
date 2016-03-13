@@ -1,167 +1,170 @@
-<hr />
+<div>
 
-<h1>{{action | capitalize}} transaction</h1>
-<!--
-<h2>Transaction</h2>
-{{transaction | json}}
+    <hr />
 
-<h2>Twin Transaction</h2>
-{{twinTransaction | json}}
--->
-<form>
-    <div class="row">
-        <div class="col-md-1">
-            <div class="form-group">
-                <label for="transaction_code">Code</label>
-                <input type="text" class="form-control" id="transaction_code" v-model="transaction.code" placeholder="Code">
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="transaction_description">Description</label>
-                <input type="text" class="form-control" id="transaction_description" v-model="transaction.description" placeholder="Description">
-            </div>                          
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="transaction_credit">Transfer Account</label>
-                <select id="transaction_transfer_account" v-model="transaction.transfer" class="form-control">
-                    <option v-for="option in accounts" :value="option">
-                        {{ option.name }} / {{option.path}}
-                    </option>
-                </select>
-            </div>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="transaction_date">Transaction Date</label>
-                <input type="date" class="form-control" id="transaction_date" v-model="transaction.transaction_date" placeholder="Transaction Date">
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="posted_date">Posted Date</label>
-                <input type="date" class="form-control" id="posted_date" v-model="transaction.posted_date" placeholder="Posted Date">
-            </div>
-        </div>
-        
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="transaction_credit">Credit</label>
-                <div class="input-group">
-                <div class="input-group-addon">$</div>
-                    <input type="text" class="form-control" id="transaction_credit" v-model="transaction.credit" placeholder="Credit">
+    <h1>{{action | capitalize}} transaction</h1>
+    <!--
+    <h2>Transaction</h2>
+    {{transaction | json}}
+
+    <h2>Twin Transaction</h2>
+    {{twinTransaction | json}}
+    -->
+    <form>
+        <div class="row">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="transaction_code">Code</label>
+                    <input type="text" class="form-control" id="transaction_code" v-model="transaction.code" placeholder="Code">
                 </div>
             </div>
-        </div>
-    
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="transaction_debit">Debit</label>
-                <div class="input-group">
-                <div class="input-group-addon">$</div>
-                    <input type="text" class="form-control" id="transaction_debit" v-model="transaction.debit" placeholder="Debit">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="transaction_description">Description</label>
+                    <input type="text" class="form-control" id="transaction_description" v-model="transaction.description" placeholder="Description">
+                </div>                          
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="transaction_credit">Transfer Account ({{twinTransaction.transfer | json}})</label>
+                    <select id="transaction_transfer_account" v-model="twinTransaction.transfer" class="form-control">
+                        <option v-for="option in accounts" :value="option.account.path">
+                            {{{ option.indent }}} {{ option.account.name }}
+                        </option>
+                    </select>
                 </div>
             </div>
         </div>
         
-    </div>
-  
-    <div class="row">
-        
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="transaction_note">Note</label>
-                <textarea rows="3" class="form-control" id="transaction_note" v-model="transaction.note" placeholder="Note"></textarea>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="transaction_date">Transaction Date</label>
+                    <input type="date" class="form-control" id="transaction_date" v-model="transaction.transaction_date" placeholder="Transaction Date">
+                </div>
             </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="posted_date">Posted Date</label>
+                    <input type="date" class="form-control" id="posted_date" v-model="transaction.posted_date" placeholder="Posted Date">
+                </div>
+            </div>
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="transaction_credit">Credit</label>
+                    <div class="input-group">
+                    <div class="input-group-addon">$</div>
+                        <input type="text" class="form-control" id="transaction_credit" v-model="transaction.credit" placeholder="Credit">
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="transaction_debit">Debit</label>
+                    <div class="input-group">
+                    <div class="input-group-addon">$</div>
+                        <input type="text" class="form-control" id="transaction_debit" v-model="transaction.debit" placeholder="Debit">
+                    </div>
+                </div>
+            </div>
+            
         </div>
-        
-    </div>
-        
-    <button @click.prevent="insertTransaction" type="submit" class="btn btn-primary" v-if='action == "add"'>Add Transaction</button>
-    <button @click.prevent="saveTransaction" type="submit" class="btn btn-primary" v-if='action == "update"'>Save Transaction</button>
-    <button @click.prevent="cancelTransaction" type="submit" class="btn btn-primary">Cancel</button>
     
-</form>
+        <div class="row">
+            
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="transaction_note">Note</label>
+                    <textarea rows="3" class="form-control" id="transaction_note" v-model="transaction.note" placeholder="Note"></textarea>
+                </div>
+            </div>
+            
+        </div>
+            
+        <button @click.prevent="insertTransaction" type="submit" class="btn btn-primary" v-if='action == "add"'>Add Transaction</button>
+        <button @click.prevent="saveTransaction" type="submit" class="btn btn-primary" v-if='action == "update"'>Save Transaction</button>
+        <button @click.prevent="cancelTransaction" type="submit" class="btn btn-primary">Cancel</button>
+        
+    </form>
 
-<hr />
+    <hr />
 
-<template v-if="data.length > 0">
-    
-    <div class="table-responsive">
-    <table class="table table-condensed table-hover">
-        <thead>
-        <tr>
-            <th v-for="key in columns"
-            @click="sortBy(key)"
-            :class="{active: sortKey == key}">
-            {{ key | camelCase }}
-            <span class="arrow"
-                :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
-            </span>
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="(idxT, entry) in data | filterBy filterKey">
-            <td v-for="(index,key) in columns" :class="key">
-                <template v-if="key.indexOf('date') > -1">
-                    {{ entry[key] | formatDate }}
-                </template>
-                <template v-if="key == 'credit' || key == 'debit'">
-                    {{ entry[key] | currency }}
-                </template>
-                <template v-if="key == 'description'">
-                    <template v-if="data[idxT].note.length > 0">
-                        <a @click.prevent="editTransaction(entry)" href="">{{ entry[key] }}</a>
-                        / {{data[idxT].note}}
+    <template v-if="data.length > 0">
+        
+        <div class="table-responsive">
+        <table class="table table-condensed table-hover">
+            <thead>
+            <tr>
+                <th v-for="key in columns"
+                @click="sortBy(key)"
+                :class="{active: sortKey == key}">
+                {{ key | camelCase }}
+                <span class="arrow"
+                    :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+                </span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(idxT, entry) in data | filterBy filterKey">
+                <td v-for="(index,key) in columns" :class="key">
+                    <template v-if="key.indexOf('date') > -1">
+                        {{ entry[key] | formatDate }}
                     </template>
-                    <template v-else>
+                    <template v-if="key == 'credit' || key == 'debit'">
+                        {{ entry[key] | currency }}
+                    </template>
+                    <template v-if="key == 'description'">
+                        <template v-if="data[idxT].note.length > 0">
+                            <a @click.prevent="editTransaction(entry)" href="">{{ entry[key] }}</a>
+                            / {{data[idxT].note}}
+                        </template>
+                        <template v-else>
+                            {{ entry[key] }}
+                        </template>
+                    </template>
+                    <template v-if="key == 'delete'">
+                        <button @click.prevent="deleteTransaction(entry)" class="btn btn-default btn-xs" style="display:inline-block"><span class="glyphicon glyphicon-remove" style="color:#700"></span></button>
+                    </template>
+                    <template v-if="key == 'save'">
+                        <button @click.prevent="editTransaction(entry)" class="btn btn-default btn-xs" style="display:inline-block;">Edit</button>
+                    </template>
+                    <template v-if="key == 'balance'">
+                        {{ (data[idxT].credit - data[idxT].debit) | balance idxT | currency }}
+                    </template>
+                    <template v-if="key == 'code'">
                         {{ entry[key] }}
                     </template>
-                </template>
-                <template v-if="key == 'delete'">
-                    <button @click.prevent="deleteTransaction(entry)" class="btn btn-default btn-xs" style="display:inline-block"><span class="glyphicon glyphicon-remove" style="color:#700"></span></button>
-                </template>
-                <template v-if="key == 'save'">
-                    <button @click.prevent="editTransaction(entry)" class="btn btn-default btn-xs" style="display:inline-block;">Edit</button>
-                </template>
-                <template v-if="key == 'balance'">
-                    {{ (data[idxT].credit - data[idxT].debit) | balance idxT | currency }}
-                </template>
-                <template v-if="key == 'code'">
-                    {{ entry[key] }}
-                </template>
-            </td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-            <th v-for="key in columns">
-                <template v-if="key == 'credit'">
-                        {{totalCredit | currency}}
-                </template>
-                <template v-else>
-                    <template v-if="key == 'debit'">
-                            {{totalDebit | currency}}
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th v-for="key in columns">
+                    <template v-if="key == 'credit'">
+                            {{totalCredit | currency}}
                     </template>
                     <template v-else>
-                        <template v-if="key == 'balance'">
-                            {{currentBalance | currency}}
+                        <template v-if="key == 'debit'">
+                                {{totalDebit | currency}}
+                        </template>
+                        <template v-else>
+                            <template v-if="key == 'balance'">
+                                {{currentBalance | currency}}
+                        </template>
+                        </template>
                     </template>
-                    </template>
-                </template>
-            </th>
-        </tr>
-        </tfoot>
-    </table>
-    </div>
-</template>
-<template v-else>
-    <div>
-        <p class="bg-info">No transaction has been recorded for this account yet.</p>
-    </div>
-</template>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+        </div>
+    </template>
+    <template v-else>
+        <div>
+            <p class="bg-info">No transaction has been recorded for this account yet.</p>
+        </div>
+    </template>
+</div>

@@ -1,16 +1,16 @@
-<h2>{{title}} - {{currentAccount.name}}</h2>
-
 <div id="transactions">
-    
-    <div class="container-fluid">
-        <div class="row">
-            
-            <comp-4yb-transactions-grid
-                title=""
-                :data="gridData"
-                :columns="gridColumns"
-                :filter-key="searchQuery">
-            </comp-4yb-transactions-grid>  
-        </div>
-   
+
+    <h2>{{title}} - {{currentAccount.name}}</h2>
+        
+        <div class="container-fluid">
+            <div class="row">
+                
+                <comp-4yb-transactions-grid
+                    title=""
+                    :data="gridData"
+                    :columns="gridColumns"
+                    :filter-key="searchQuery">
+                </comp-4yb-transactions-grid>  
+            </div>
+
 </div>

@@ -2,6 +2,7 @@
 const app = require('remote').require('app');
 const jetpack = require('fs-jetpack').cwd(app.getAppPath());
 var Vue = require('vue');
+const AccountManager = require('../../js/account-manager.js').AccountManager;
 var currentBalance = 0;
 
 exports.main = Vue.extend({
@@ -90,28 +91,34 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
             if (this.$parent.currentAccount !== null) {
             
                 var vm = this;
-                var transactionTransfer = JSON.parse(JSON.stringify(this.transaction.transfer));
+                
+                var transactionTransfer = JSON.parse(JSON.stringify(this.twinTransaction.transfer));
+                               
+                console.log("Transfer account to: ");
                 console.log(transactionTransfer);
                 
-                this.transaction.entity = "transaction";
-                this.transaction._id = db_4yb.createNewId();
-                this.transaction._group = this.transaction._id;
-                this.transaction.transfer = this.$parent.currentAccount.path;
+                var currentTransaction = JSON.parse(JSON.stringify(this.transaction));
                 
-                var twinTransaction = JSON.parse(JSON.stringify(this.transaction));
+                currentTransaction.entity = "transaction";
+                currentTransaction._id = db_4yb.createNewId();
+                currentTransaction._group = currentTransaction._id;
+                currentTransaction.transfer = this.$parent.currentAccount.path;
+                
+                var twinTransaction = JSON.parse(JSON.stringify(currentTransaction));
                 var twinId = db_4yb.createNewId();
-                while (twinId == this.transaction._id) {
+                while (twinId == currentTransaction._id) {
                     twinId = db_4yb.createNewId();
                 }
                 twinTransaction._id = twinId;
-                twinTransaction.transfer = transactionTransfer.path;
+                twinTransaction.transfer = transactionTransfer;
                 
                 if (this.$parent.currentAccount.type === "BANK" || this.$parent.currentAccount.type === "ASSET") {
                     switch (transactionTransfer.type) {
+                        case "BANK":
                         case "CC":
                         case "LIA":
-                            twinTransaction.debit = this.transaction.credit;
-                            twinTransaction.credit = this.transaction.debit;
+                            twinTransaction.debit = currentTransaction.credit;
+                            twinTransaction.credit = currentTransaction.debit;
                         break;
                         default:
                         break;
@@ -122,15 +129,22 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
                     switch (transactionTransfer.type) {
                         case "ASSET":
                         case "BANK":
-                            twinTransaction.debit = this.transaction.credit;
-                            twinTransaction.credit = this.transaction.debit;
+                            twinTransaction.debit = currentTransaction.credit;
+                            twinTransaction.credit = currentTransaction.debit;
                         break;
                         default:
                         break;
                     }
                 }
+                
+                ///*
+                console.log("Transaction:");
+                console.log(currentTransaction);
+                console.log("Twin Transaction:");
+                console.log(twinTransaction); 
                 // */
-                db_4yb.insert([this.transaction, twinTransaction], function (err, newDoc) {
+                ///*
+                db_4yb.insert([currentTransaction, twinTransaction], function (err, newDoc) {
                     vm.$root.currentView = "comp1";
                 });
                 // */
@@ -142,8 +156,8 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
             if (this.$parent.currentAccount !== null) {
             
                 var vm = this;
-                var transactionTransfer = JSON.parse(JSON.stringify(this.transaction.transfer));
-                
+                var transactionTransfer = JSON.parse(JSON.stringify(this.twinTransaction.transfer));
+                               
                 console.log("Transfer account to: ");
                 console.log(transactionTransfer);
                 
@@ -151,16 +165,15 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
                 currentTransaction.transfer = this.$parent.currentAccount.path;
                 
                 var twinTransaction = JSON.parse(JSON.stringify(this.twinTransaction));
-                twinTransaction.transfer = transactionTransfer.path;
+                twinTransaction.transfer = transactionTransfer;
                 twinTransaction.debit = currentTransaction.debit;
                 twinTransaction.credit = currentTransaction.credit;
                 
                 if (this.$parent.currentAccount.type === "BANK" || this.$parent.currentAccount.type === "ASSET") {
                     switch (transactionTransfer.type) {
+                        case "BANK":console.log("BANK | ASSET -> BANK");
                         case "CC":
-                            console.log("BANK | ASSET -> CC");
                         case "LIA":
-                            console.log("BANK | ASSET -> LIA");
                             twinTransaction.debit = currentTransaction.credit;
                             twinTransaction.credit = currentTransaction.debit;
                         break;
@@ -183,12 +196,14 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
                     }
                 }
                 
+                 /*
                 console.log("Transaction:");
                 console.log(currentTransaction);
                 console.log("Twin Transaction:");
-                console.log(twinTransaction);
+                console.log(twinTransaction); 
+                // */
                 
-                // /*
+                ///*
                 db_4yb.update({_id: currentTransaction._id}, currentTransaction, function (err, numReplaced) {
                     console.log(err);
                     console.log(numReplaced);
@@ -205,6 +220,7 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
         editTransaction: function (transaction) {
             
             var vm = this;
+            // Retrieve the twin transaction, the one with a transfer path different from the current edited transaction
             db_4yb.find({_group: transaction._group, transfer: { $ne: transaction.transfer }}).sort({ name: 1 }).exec(function (err, docs) {
                 vm.transaction = transaction;
                 vm.twinTransaction = docs[0];
@@ -213,37 +229,9 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
                         vm.transaction.transfer = entry;
                     }
                 });
-                console.log(vm.transaction);
+                //console.log(vm.transaction);
+                //console.log(vm.twinTransaction);
             });
-            if (this.$parent.currentAccount !== null) {
-            /*
-                var vm = this;
-                var transactionTransfer = JSON.parse(JSON.stringify(this.transaction.transfer));
-                console.log(transactionTransfer);
-                
-                this.transaction.entity = "transaction";
-                //this.transaction._id = db_4yb.createNewId();
-                this.transaction._group = this.transaction._id;
-                this.transaction.transfer = transactionTransfer.path;
-                
-                var twinTransaction = JSON.parse(JSON.stringify(this.transaction));
-                var twinId = db_4yb.createNewId();
-                while (twinId == this.transaction._id) {
-                    twinId = db_4yb.createNewId();
-                }
-                twinTransaction._id = twinId;
-                twinTransaction.transfer = this.$parent.currentAccount.path;
-                
-                // TODO : make it work for all kind of twin account (i.e. bank to credit card, debit becomes credit)
-                // to do so, use the type account of this.$parent.currentAccount and transactionTransfer
-                
-                
-                db_4yb.insert([this.transaction, twinTransaction], function (err, newDoc) {
-                    vm.$root.currentView = "comp1";
-                });
-                // */
-                
-            }
             
         },
         deleteTransaction: function (transaction) {
@@ -266,7 +254,7 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
         }
         ,balance: function(input, currentIndex) {
             if (this.$parent.$parent.data[currentIndex - 1] === undefined) {
-                console.log(input + "/" + currentIndex);
+                //console.log(input + "/" + currentIndex);
                 currentBalance = input;
             } else {
                 currentBalance += input;
@@ -279,9 +267,16 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
     }
     ,activate: function (done){
         var vm = this;
+        // TODO: exclude current account
+        var accountManager = new AccountManager(db_4yb);
+        accountManager.getAll_FlatList(function(accounts){
+            vm.accounts = accounts;
+        });
+        /*
         db_4yb.find({entity: 'account', path: { $ne: vm.$parent.currentAccount.path }}).sort({ name: 1 }).exec(function (err, docs) {
             vm.accounts = JSON.parse(JSON.stringify(docs));
         });
+        */
         done();
     }
 });

@@ -1,25 +1,29 @@
-<h2>{{title}}</h2>
+<div>
+    
+    <h2>{{title}}</h2>
 
-<hr />
-<button @click.prevent="changeView('comp4ybFormAccount', reset = true)" type="button" class="btn btn-primary">New Account</button>
-<hr />
+    <hr />
+    <button @click.prevent="changeView('comp4ybFormAccount', reset = true)" type="button" class="btn btn-primary">New Account</button>
+    <hr />
 
-<!--
-{{treeData | json}}
--->
+    <!--
+    {{treeData | json}}
+    -->
 
-<template v-if="treeData.children.length">
-    <div class="row">
-        <div class="col-sm-8">
-            <div class="treeview">
-                <ul id="accounts" class="list-group">
-                    <item class="item" :model="treeData" :open="true" :root="true" :level="0">
-                    </item>
-                </ul>
+    <template v-if="hasChildren">
+        <div class="row">
+            <div class="col-sm-8">
+                <div id="accounts" class="treeview">
+                    <ul class="list-group">
+                        <comp-4yb-account-tree-item :model="treeData" :open="true" :root="true" :level="0">
+                        </comp-4yb-account-tree-item>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</template>
-<template v-else>
-    <p>No account has been created yet. Would you like to create one?</p>
-</template>
+    </template>
+    <template v-else>
+        <p>No account has been created yet. Would you like to create one?</p>
+    </template>
+
+</div>

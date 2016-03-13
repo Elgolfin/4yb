@@ -26,12 +26,16 @@ const Datastore = require('nedb');
 //ar db_4yb = Db4yb.load(db_4yb_filepath).get();
 db_4yb.findAsync({entity: /account/ }).sort({name: 1}).execAsync()
     .then(function(docs){
-        console.log(docs)
+        //console.log(docs)
     })
     .catch(function (err) {
-        console.log(err);
+        //console.log(err);
 });
 
+const accountTree = require('./components/account/account-tree.vue.js').accountTree;
+const accountTreeItem = require('./components/account/account-treeitem.vue.js').accountTreeItem;
+Vue.component('comp4ybAccountTree', accountTree);
+Vue.component('comp4ybAccountTreeItem', accountTreeItem);
 
 // Load all components
 var sidebar = require('./components/shell/sidebar.vue.js').sidebar;
