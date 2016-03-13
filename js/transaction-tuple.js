@@ -12,6 +12,10 @@ let TransactionTuple = exports.TransactionTuple = function (db) {
     this.transactionDate = null;
     this.postedDate = null;
     this.recognitionDate = null;
+    this.city = null;
+    this.state = null;
+    this.country = null;
+    this.zipcode = null;
     
     // Transaction specific (current)
     this.currentTransaction = {
@@ -22,6 +26,10 @@ let TransactionTuple = exports.TransactionTuple = function (db) {
         transactionDate: this.transactionDate,
         postedDate: this.postedDate,
         recognitionDate: this.recognitionDate,
+        city: this.city,
+        state: this.state,
+        country: this.country,
+        zipcode: this.zipcode,
         transfer: null,
         _id: null,
         debit: null,
@@ -37,6 +45,10 @@ let TransactionTuple = exports.TransactionTuple = function (db) {
         transactionDate: this.transactionDate,
         postedDate: this.postedDate,
         recognitionDate: this.recognitionDate,
+        city: this.city,
+        state: this.state,
+        country: this.country,
+        zipcode: this.zipcode,
         transfer: null,
         _id: null,
         debit: null,
@@ -83,8 +95,7 @@ TransactionTuple.prototype.save = function () {
         }
     }
     
-    let transaction = this;
-    saveTransactionTuple(transaction, callback);
+    saveTransactionTuple.call(this, callback);
 }
 
 TransactionTuple.prototype.delete = function () {
@@ -92,12 +103,7 @@ TransactionTuple.prototype.delete = function () {
 }
 
 TransactionTuple.prototype.add = function (callback) {
-    //return Account.prototype.save(callback);
-}
-
-TransactionTuple.prototype.setName = function (name) {
-    this.name = name;
-    return this;
+    TransactionTuple.prototype.save(callback);
 }
 
 // linkedTransfer
@@ -109,17 +115,21 @@ TransactionTuple.prototype.load = function (currentTransaction, twinTransaction)
     this.transactionDate = currentTransaction.transactionDate;
     this.postedDate = currentTransaction.postedDate;
     this.recognitionDate = currentTransaction.recognitionDate;
+    this.city = currentTransaction.city;
+    this.state = currentTransaction.state;
+    this.country = currentTransaction.country;
+    this.zipcode = currentTransaction.zipcode;
     
     this.currentTransaction.transfer = currentTransaction.transfer;
     this.currentTransaction._id = currentTransaction._id;
     this.currentTransaction.debit = currentTransaction.debit;
     this.currentTransaction.credit = currentTransaction.credit;
-    
     this.twinTransaction.transfer = twinTransaction.transfer;
     this.twinTransaction._id = twinTransaction._id;
     this.twinTransaction.debit = twinTransaction.debit;
     this.twinTransaction.credit = twinTransaction.credit;
     
+    setCommonProperties.call(this);
     return this;
 }
 
@@ -147,6 +157,10 @@ TransactionTuple.prototype.JSONify = function () {
             transactionDate: this.transactionDate,
             postedDate: this.postedDate,
             recognitionDate: this.recognitionDate,
+            city: this.city,
+            state: this.state,
+            country: this.country,
+            zipcode: this.zipcode,
             transfer: this.currentTransaction.transfer.path,
             _id: this.currentTransaction._id,
             debit: this.currentTransaction.debit,
@@ -161,6 +175,10 @@ TransactionTuple.prototype.JSONify = function () {
             transactionDate: this.transactionDate,
             postedDate: this.postedDate,
             recognitionDate: this.recognitionDate,
+            city: this.city,
+            state: this.state,
+            country: this.country,
+            zipcode: this.zipcode,
             transfer: this.twinTransaction.transfer.path,
             _id: this.twinTransaction._id,
             debit: this.twinTransaction.debit,
@@ -170,13 +188,35 @@ TransactionTuple.prototype.JSONify = function () {
     };
 }
 
-function saveTransactionTuple(transactionTuple, callback) {
-    const transactionTupleToBeSaved = transactionTuple.JSONify();
-    transactionTuple.db.update({ _id: transactionTuple.currentTransaction._id }, transactionTuple.currentTransaction, { upsert: true }, function (err, numReplaced) {
+function saveTransactionTuple(callback) {
+    const transactionTupleToBeSaved = this.JSONify();
+    const db = this.db;
+    db.update({ _id: transactionTupleToBeSaved.currentTransaction._id }, transactionTupleToBeSaved.currentTransaction, { upsert: true }, function (err, numReplaced) {
         if (err) { throw err; }
-        transactionTuple.db.update({ _id: transactionTuple.twinTransaction._id }, transactionTuple.twinTransaction, { upsert: true }, function (err, numReplaced) {
+        db.update({ _id: transactionTupleToBeSaved.twinTransaction._id }, transactionTupleToBeSaved.twinTransaction, { upsert: true }, function (err, numReplaced) {
             if (err) { throw err; }
             callback(transactionTupleToBeSaved);
         });
     });
+}
+
+function setCommonProperties() {
+    
+    let transactions = [this.currentTransaction, this.twinTransaction];
+    let transactionTuple = this;
+    transactions.forEach(function(entry) {
+        entry.code = transactionTuple.code;
+        entry.description = transactionTuple.description;
+        entry.note = transactionTuple.note;
+        entry._group = transactionTuple._group;
+        entry.transactionDate = transactionTuple.transactionDate;
+        entry.postedDate = transactionTuple.postedDate;
+        entry.recognitionDate = transactionTuple.recognitionDate;
+        entry.city = transactionTuple.city;
+        entry.state = transactionTuple.state;
+        entry.country = transactionTuple.country;
+        entry.zipcode = transactionTuple.zipcode;
+    });
+
+    return this;
 }

@@ -18,7 +18,11 @@ let testData = [
         transfer: "a.a",
         debit: 100.01,
         credit: 0,
-        entity: "transaction"
+        entity: "transaction",
+        city: "Montréal",
+        state: "QC",
+        country: "Canada",
+        zipcode: "A1B 2C3"      
     },
     {
         _id: '2aNHWb22sL0jX7zg',
@@ -32,7 +36,11 @@ let testData = [
         transfer: "a.b",
         debit: 100.01,
         credit: 0,
-        entity: "transaction"
+        entity: "transaction",
+        city: "Montréal",
+        state: "QC",
+        country: "Canada",
+        zipcode: "A1B 2C3"
     }
 ];
         
@@ -91,7 +99,11 @@ describe('Transaction Tuple', function() {
                 recognitionDate: null,
                 transfer: {path: "b.a", type: "ASSET"},
                 debit: 112.49,
-                credit: 0
+                credit: 0,
+                city: "Montréal",
+                state: "QC",
+                country: "Canada",
+                zipcode: "A1B 2C3"
             };
             var linkedTransfer = {path: "b.c", type: "CC"};
             var transactionTuple = new TransactionTuple(db_4yb).load(transaction, {transfer: linkedTransfer});
@@ -111,6 +123,12 @@ describe('Transaction Tuple', function() {
                 assert.strictEqual(transactionTuple.currentTransaction.credit, 0);
                 assert.strictEqual(transactionTuple.twinTransaction.debit, 0);
                 assert.strictEqual(transactionTuple.twinTransaction.credit, 112.49);
+                
+                assert.strictEqual(transactionTuple.currentTransaction.city, "Montréal");
+                //assert.strictEqual(transactionTuple.currentTransaction.state, "QC");
+                //assert.strictEqual(transactionTuple.currentTransaction.country, "Canada");
+                //assert.strictEqual(transactionTuple.currentTransaction.zipcode, "A1B 2C3");
+                
                 done();
             });
         });  
@@ -125,7 +143,11 @@ describe('Transaction Tuple', function() {
                 recognitionDate: null,
                 transfer: {path: "b.c", type: "CC"},
                 debit: 99.99,
-                credit: 0
+                credit: 0,
+                city: "Montréal",
+                state: "QC",
+                country: "Canada",
+                zipcode: "A1B 2C3"
             };
             var linkedTransfer = {path: "c.a", type: "EXP"};
             var transactionTuple = new TransactionTuple(db_4yb).load(transaction, {transfer: linkedTransfer});
