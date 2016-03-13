@@ -267,16 +267,12 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
     }
     ,activate: function (done){
         var vm = this;
-        // TODO: exclude current account
         var accountManager = new AccountManager(db_4yb);
+        // Exclude current selected account (we do not want to see him in the select html tag as an selectable option)
+        accountManager.excludedAccount = vm.$parent.currentAccount.path;
         accountManager.getAll_FlatList(function(accounts){
             vm.accounts = accounts;
         });
-        /*
-        db_4yb.find({entity: 'account', path: { $ne: vm.$parent.currentAccount.path }}).sort({ name: 1 }).exec(function (err, docs) {
-            vm.accounts = JSON.parse(JSON.stringify(docs));
-        });
-        */
         done();
     }
 });

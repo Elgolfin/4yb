@@ -38,7 +38,7 @@ describe('Account', function() {
         });
     });
     
-    describe('Account Initialization', function() {
+    describe('Account CRUD', function() {
         
         it('returns an empty account', function() {
             var account = new Account(db_4yb);
