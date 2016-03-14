@@ -6,6 +6,7 @@ let AccountManager = exports.AccountManager = function (db) {
     this.db = db;
     this.excludedAccount = null; // A path (string) or an array of path (array of strings)
     this.rootAccount = "a"; // A path (string)
+    this.accountType = [];
     return this;
 }
 
@@ -20,6 +21,7 @@ AccountManager.prototype.getAll = function () {
         callback = arguments[1];
     }
     
+    // Build the query
     let rootAccount = this.rootAccount;
     let regex = new RegExp("^" + rootAccount + "\\.");
     let query = { entity: "account", path: regex };
@@ -35,6 +37,13 @@ AccountManager.prototype.getAll = function () {
                 };
     }
     
+    if (Array.isArray(this.accountType) && this.accountType.length > 0) {
+        query.type = { $in: this.accountType};
+    }
+    
+    //console.log(query);
+    
+    // Retrieve the accounts
     this.db.findAsync(query).sort({ name: 1 }).execAsync().then(function (docs) {
         let accountsTree = getAccounts(rootAccount, JSON.parse(JSON.stringify(docs)));
         callback(accountsTree);
@@ -50,6 +59,24 @@ AccountManager.prototype.getAll_FlatList = function (callback) {
 
 AccountManager.prototype.getAll_TreeList = function (callback) {
     AccountManager.prototype.getAll.call(this, buildTreeList, function(accounts){
+        callback(accounts);
+    });
+}
+
+AccountManager.prototype.getAll_Default = function (callback) {
+    AccountManager.prototype.getAll.call(this, buildDefault, function(accounts){
+        callback(accounts);
+    });
+}
+
+AccountManager.prototype.getAll_Hash = function (callback) {
+    AccountManager.prototype.getAll.call(this, buildHash, function(accounts){
+        callback(accounts);
+    });
+}
+
+AccountManager.prototype.getAll_ArrayOfPath = function (callback) {
+    AccountManager.prototype.getAll.call(this, buildArrayOfPath, function(accounts){
         callback(accounts);
     });
 }
@@ -83,10 +110,34 @@ data = the list of the accounts (each account has a property called path which r
 */
 function buildTreeList (path, data) {
     var ret = [];
-    data.forEach(function(entry, index){
+    data.forEach(function(entry){
         if (entry.parent == path) {
             ret.push({account: entry, children: buildTreeList(entry.path, data)})
         }
+    });
+    return ret;
+}
+
+function buildDefault (path, data) {
+    var ret = [];
+    data.forEach(function(entry){
+        ret.push(entry);
+    });
+    return ret;
+}
+
+function buildHash(path, data) {
+    var ret = {};
+    data.forEach(function(entry){
+        ret[entry.path] = entry;
+    });
+    return ret;
+}
+
+function buildArrayOfPath(path, data) {
+    var ret = [];
+    data.forEach(function(entry){
+        ret.push(entry.path);
     });
     return ret;
 }

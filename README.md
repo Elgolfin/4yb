@@ -24,6 +24,12 @@ To to:
 Or
 - Run the 4YB exe if you installed from the package
 
+## Running the app
+- npm test
+
+Or
+- mocha -w
+
 ## Links
 
 https://www.iconfinder.com/iconsets/finance-10

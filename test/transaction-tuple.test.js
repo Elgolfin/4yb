@@ -12,9 +12,9 @@ let testData = [
         code: "c",
         description: "d",
         note: "n",
-        transactionDate: new Date(2016,1,1),
-        postedDate: new Date(2016,1,5),
-        recognitionDate: null,
+        transaction_date: new Date(2016,1,1),
+        posted_date: new Date(2016,1,5),
+        recognition_date: null,
         transfer: "a.a",
         debit: 100.01,
         credit: 0,
@@ -30,9 +30,9 @@ let testData = [
         code: "c",
         description: "d",
         note: "n",
-        transactionDate: new Date(2016,1,1),
-        postedDate: new Date(2016,1,5),
-        recognitionDate: null,
+        transaction_date: new Date(2016,1,1),
+        posted_date: new Date(2016,1,5),
+        recognition_date: null,
         transfer: "a.b",
         debit: 100.01,
         credit: 0,
@@ -94,9 +94,9 @@ describe('Transaction Tuple', function() {
                 code: "c1",
                 description: "d1",
                 note: "n1",
-                transactionDate: new Date(2016,2,1),
-                postedDate: new Date(2016,2,3),
-                recognitionDate: null,
+                transaction_date: new Date(2016,2,1),
+                posted_date: new Date(2016,2,3),
+                recognition_date: null,
                 transfer: {path: "b.a", type: "ASSET"},
                 debit: 112.49,
                 credit: 0,
@@ -125,9 +125,9 @@ describe('Transaction Tuple', function() {
                 assert.strictEqual(transactionTuple.twinTransaction.credit, 112.49);
                 
                 assert.strictEqual(transactionTuple.currentTransaction.city, "Montréal");
-                //assert.strictEqual(transactionTuple.currentTransaction.state, "QC");
-                //assert.strictEqual(transactionTuple.currentTransaction.country, "Canada");
-                //assert.strictEqual(transactionTuple.currentTransaction.zipcode, "A1B 2C3");
+                assert.strictEqual(transactionTuple.currentTransaction.state, "QC");
+                assert.strictEqual(transactionTuple.currentTransaction.country, "Canada");
+                assert.strictEqual(transactionTuple.currentTransaction.zipcode, "A1B 2C3");
                 
                 done();
             });
@@ -138,9 +138,9 @@ describe('Transaction Tuple', function() {
                 code: "c2",
                 description: "d2",
                 note: "n2",
-                transactionDate: new Date(2016,2,28),
-                postedDate: new Date(2016,3,2),
-                recognitionDate: null,
+                transaction_date: new Date(2016,2,28),
+                posted_date: new Date(2016,3,2),
+                recognition_date: null,
                 transfer: {path: "b.c", type: "CC"},
                 debit: 99.99,
                 credit: 0,

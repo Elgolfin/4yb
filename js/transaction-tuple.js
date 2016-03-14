@@ -9,13 +9,14 @@ let TransactionTuple = exports.TransactionTuple = function (db) {
     this.description = null;
     this.note = null;
     this._group = null;
-    this.transactionDate = null;
-    this.postedDate = null;
-    this.recognitionDate = null;
+    this.transaction_date = null;
+    this.posted_date = null;
+    this.recognition_date = null;
     this.city = null;
     this.state = null;
     this.country = null;
     this.zipcode = null;
+    this.tags = [];
     
     // Transaction specific (current)
     this.currentTransaction = {
@@ -23,13 +24,14 @@ let TransactionTuple = exports.TransactionTuple = function (db) {
         description: this.description,
         note: this.note,
         _group: this._group,
-        transactionDate: this.transactionDate,
-        postedDate: this.postedDate,
-        recognitionDate: this.recognitionDate,
+        transaction_date: this.transaction_date,
+        posted_date: this.posted_date,
+        recognition_date: this.recognition_date,
         city: this.city,
         state: this.state,
         country: this.country,
         zipcode: this.zipcode,
+        tags: this.tags,
         transfer: null,
         _id: null,
         debit: null,
@@ -42,13 +44,14 @@ let TransactionTuple = exports.TransactionTuple = function (db) {
         description: this.description,
         note: this.note,
         _group: this._group,
-        transactionDate: this.transactionDate,
-        postedDate: this.postedDate,
-        recognitionDate: this.recognitionDate,
+        transaction_date: this.transaction_date,
+        posted_date: this.posted_date,
+        recognition_date: this.recognition_date,
         city: this.city,
         state: this.state,
         country: this.country,
         zipcode: this.zipcode,
+        tags: this.tags,
         transfer: null,
         _id: null,
         debit: null,
@@ -112,13 +115,14 @@ TransactionTuple.prototype.load = function (currentTransaction, twinTransaction)
     this.description = currentTransaction.description;
     this.note = currentTransaction.note;
     this._group = currentTransaction._group;
-    this.transactionDate = currentTransaction.transactionDate;
-    this.postedDate = currentTransaction.postedDate;
-    this.recognitionDate = currentTransaction.recognitionDate;
+    this.transaction_date = currentTransaction.transaction_date;
+    this.posted_date = currentTransaction.posted_date;
+    this.recognition_date = currentTransaction.recognition_date;
     this.city = currentTransaction.city;
     this.state = currentTransaction.state;
     this.country = currentTransaction.country;
     this.zipcode = currentTransaction.zipcode;
+    this.tags = currentTransaction.tags;
     
     this.currentTransaction.transfer = currentTransaction.transfer;
     this.currentTransaction._id = currentTransaction._id;
@@ -154,13 +158,14 @@ TransactionTuple.prototype.JSONify = function () {
             description: this.description,
             note: this.note,
             _group: this._group,
-            transactionDate: this.transactionDate,
-            postedDate: this.postedDate,
-            recognitionDate: this.recognitionDate,
+            transaction_date: this.transaction_date,
+            posted_date: this.posted_date,
+            recognition_date: this.recognition_date,
             city: this.city,
             state: this.state,
             country: this.country,
             zipcode: this.zipcode,
+            tags: this.tags,
             transfer: this.currentTransaction.transfer.path,
             _id: this.currentTransaction._id,
             debit: this.currentTransaction.debit,
@@ -172,13 +177,14 @@ TransactionTuple.prototype.JSONify = function () {
             description: this.description,
             note: this.note,
             _group: this._group,
-            transactionDate: this.transactionDate,
-            postedDate: this.postedDate,
-            recognitionDate: this.recognitionDate,
+            transaction_date: this.transaction_date,
+            posted_date: this.posted_date,
+            recognition_date: this.recognition_date,
             city: this.city,
             state: this.state,
             country: this.country,
             zipcode: this.zipcode,
+            tags: this.tags,
             transfer: this.twinTransaction.transfer.path,
             _id: this.twinTransaction._id,
             debit: this.twinTransaction.debit,
@@ -209,13 +215,14 @@ function setCommonProperties() {
         entry.description = transactionTuple.description;
         entry.note = transactionTuple.note;
         entry._group = transactionTuple._group;
-        entry.transactionDate = transactionTuple.transactionDate;
-        entry.postedDate = transactionTuple.postedDate;
-        entry.recognitionDate = transactionTuple.recognitionDate;
+        entry.transaction_date = transactionTuple.transaction_date;
+        entry.posted_date = transactionTuple.posted_date;
+        entry.recognition_date = transactionTuple.recognition_date;
         entry.city = transactionTuple.city;
         entry.state = transactionTuple.state;
         entry.country = transactionTuple.country;
         entry.zipcode = transactionTuple.zipcode;
+        entry.tags = transactionTuple.tags;
     });
 
     return this;
