@@ -96,5 +96,41 @@
     "state": "QC",
     "country": "Canada",
     "zipcode": "A1B 2C3"
+  },
+  {
+    "_id": "8aNHWb22sL0jX7zg",
+    "_group": "8aNHWb22sL0jX7zg",
+    "code": "c3",
+    "description": "d3",
+    "note": "n3",
+    "transaction_date": "2016-02-01",
+    "posted_date": "2016-02-01",
+    "recognition_date": null,
+    "transfer": "a.a",
+    "debit": 20,
+    "credit": 0,
+    "entity": "transaction",
+    "city": "Montréal",
+    "state": "QC",
+    "country": "Canada",
+    "zipcode": "A1B 2C3"
+  },
+  {
+    "_id": "9aNHWb22sL0jX7zg",
+    "_group": "8aNHWb22sL0jX7zg",
+    "code": "c3",
+    "description": "d3",
+    "note": "n3",
+    "transaction_date": "2016-02-01",
+    "posted_date": "2016-02-01",
+    "recognition_date": null,
+    "transfer": "a.b",
+    "debit": 20,
+    "credit": 0,
+    "entity": "transaction",
+    "city": "Montréal",
+    "state": "QC",
+    "country": "Canada",
+    "zipcode": "A1B 2C3"
   }
 ]

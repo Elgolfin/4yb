@@ -129,9 +129,9 @@ TransactionsManager.prototype.getChartsDataSet = function () {
 
 function setBalance(transactions){
     transactions.forEach(function(entry, index){
-        entry.posted_date = new Date(entry.posted_date);
-        entry.transaction_date = new Date(entry.transaction_date);
-        entry.recognition_date = new Date(entry.recognition_date);
+        entry.posted_date = new Date(addTimeZone(entry.posted_date));
+        entry.transaction_date = new Date(addTimeZone(entry.transaction_date));
+        entry.recognition_date = new Date(addTimeZone(entry.recognition_date));
         if (index === 0) {
             entry.balance = entry.credit - entry.debit;
         } else {
@@ -149,6 +149,12 @@ function setTransfer(transactions){
     return transactions;
 }
 
+function addTimeZone(date) {
+    if (date && date.length == 10) {
+        date += "T05:00:00.000Z";
+    }
+    return date;
+}
 
 /*
 

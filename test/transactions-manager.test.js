@@ -32,15 +32,15 @@ describe('Transactions Manager', function() {
             transactionsManager.rootAccount = "a.a";
             transactionsManager.getAll(function(tm){
                 let transactions = tm.transactions;
-                assert.strictEqual(transactions.length, 2);
+                assert.strictEqual(transactions.length, 3);
                 assert.isAbove(transactions[1].posted_date, transactions[0].posted_date);
                 assert.strictEqual(Object.prototype.toString.call(transactions[0].posted_date), "[object Date]");
                 assert.strictEqual(Object.prototype.toString.call(transactions[0].transaction_date), "[object Date]");
                 assert.strictEqual(Object.prototype.toString.call(transactions[0].recognition_date), "[object Date]");
-                assert.strictEqual(transactions[0].balance, -100.01);
-                assert.strictEqual(transactions[1].balance, -154.02);
-                assert.strictEqual(transactions[0].transfer.path, "a.a");
+                assert.strictEqual(transactions[1].balance, -120.01);
+                assert.strictEqual(transactions[2].balance, -174.02);
                 assert.strictEqual(transactions[1].transfer.path, "a.a");
+                assert.strictEqual(transactions[2].transfer.path, "a.a");
             });
         });
         
@@ -65,7 +65,7 @@ describe('Transactions Manager', function() {
                 let dataChart = tm.getChartsDataSet();
                 assert.strictEqual(dataChart.labels.length, 1);
                 assert.strictEqual(dataChart.datasets[1].data.length, 1);
-                assert.strictEqual(dataChart.datasets[1].data[0], 154.02);
+                assert.strictEqual(dataChart.datasets[1].data[0], 174.02);
                 assert.strictEqual(dataChart.datasets[0].data.length, 1);
                 assert.strictEqual(dataChart.datasets[0].data[0], 0);
             });
