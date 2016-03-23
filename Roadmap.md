@@ -17,6 +17,7 @@
     * Type ahead when entering a new transaction (to search a same transaction type in the bd)
     * Add the location of a transaction (city, state/province, country)
     * Add system accounts at the root (system account cannot be deleted)
+    * Add a tags property to the transaction
 
 ## 0.6.0
 
