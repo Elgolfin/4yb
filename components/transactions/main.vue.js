@@ -62,6 +62,32 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
             })
             return total;
         },
+        postedDate: {
+            get: function() {
+                var date = this.transaction.posted_date;
+                if (Object.prototype.toString.call(this.transaction.posted_date) === "[object Date]") {
+                    date = this.transaction.posted_date.toISOString().substr(0,10);
+                }
+                console.log(date.substr(0,10));
+                return date.substr(0,10);    
+            },
+            set : function(newValue) {
+                this.transaction.posted_date = newValue;
+            }
+        },
+        transactionDate: {
+            get: function() {
+                var date = this.transaction.transaction_date;
+                if (Object.prototype.toString.call(this.transaction.transaction_date) === "[object Date]") {
+                    date = this.transaction.transaction_date.toISOString().substr(0,10);
+                }
+                console.log(date.substr(0,10));
+                return date.substr(0,10);    
+            },
+            set : function (newValue) {
+                this.transaction.transaction_date = newValue;
+            }
+        },
         totalCredit: function () {
             var total = 0;
             this.data.forEach(function(entry){
@@ -137,6 +163,11 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
                     }
                 }
                 
+                currentTransaction.posted_date = new Date(currentTransaction.posted_date);
+                twinTransaction.posted_date = new Date(twinTransaction.posted_date);
+                currentTransaction.transaction_date = new Date(currentTransaction.transaction_date);
+                twinTransaction.transaction_date = new Date(twinTransaction.transaction_date);
+                
                 ///*
                 console.log("Transaction:");
                 console.log(currentTransaction);
@@ -196,7 +227,7 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
                     }
                 }
                 
-                 /*
+                // /*
                 console.log("Transaction:");
                 console.log(currentTransaction);
                 console.log("Twin Transaction:");
@@ -229,8 +260,8 @@ exports.grid = Vue.component('comp-4yb-transactions-grid', {
                         vm.transaction.transfer = entry;
                     }
                 });
-                //console.log(vm.transaction);
-                //console.log(vm.twinTransaction);
+                console.log(vm.transaction);
+                console.log(vm.twinTransaction);
             });
             
         },
