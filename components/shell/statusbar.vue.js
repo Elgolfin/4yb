@@ -1,5 +1,5 @@
 /* global process, db_4yb_filepath */
-const app = require('remote').require('app');
+const app = require('electron').remote.app;
 const jetpack = require('fs-jetpack').cwd(app.getAppPath());
 var Vue = require('vue');
 var mixin = require('../../mixins/mixins.js').mixin;

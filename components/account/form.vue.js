@@ -1,5 +1,5 @@
 /* global db_4yb */
-const app = require('remote').require('app');
+const app = require('electron').remote.app;
 const jetpack = require('fs-jetpack').cwd(app.getAppPath());
 const alphabet = require('../../js/alphabet.js').alphabet;
 const Account = require('../../js/account.js').Account;

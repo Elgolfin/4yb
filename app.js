@@ -1,17 +1,7 @@
-// Here is the starting point for code of your own application.
-// All stuff below is just to show you how it works. You can delete all of it.
-
-// Modules which you authored in this project are intended to be
-// imported through new ES6 syntax.
-//import { greet } from './testImport.js';
-//console.log(greet());
-
-// Node.js modules and those from npm
-// are required the same way as always.
-const app = require('remote').require('app');
+const app = require('electron').remote.app;
 const jetpack = require('fs-jetpack').cwd(app.getAppPath());
 const promis = require('bluebird');
-const db_4yb_filepath = require('remote').getGlobal('filepath');
+const db_4yb_filepath = require('electron').remote.getGlobal('filepath');
 //const PromiseDatastore = require('./js/nedb.promises.js').PromiseDatastore;
 const Db4yb = require('./js/4yb-database.js').Db4yb;
 const db_4yb = new Db4yb().load(db_4yb_filepath).Datastore;

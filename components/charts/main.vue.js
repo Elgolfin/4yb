@@ -1,5 +1,5 @@
 /* global db_4yb */
-const app = require('remote').require('app');
+const app = require('electron').remote.app;
 const jetpack = require('fs-jetpack').cwd(app.getAppPath());
 var Vue = require('vue');
 var Chart = require('../../js/Chart.min.js');

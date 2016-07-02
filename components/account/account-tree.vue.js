@@ -1,6 +1,6 @@
 /* global db_4yb */
 'use strict';
-const app = require('remote').require('app');
+const app = require('electron').remote.app;
 const jetpack = require('fs-jetpack').cwd(app.getAppPath());
 const AccountManager = require('../../js/account-manager.js').AccountManager;
 let Vue = require('vue');

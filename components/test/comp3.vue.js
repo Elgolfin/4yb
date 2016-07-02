@@ -1,5 +1,5 @@
 /* global Bloodhound */
-const app = require('remote').require('app');
+const app = require('electron').remote.app;
 const jetpack = require('fs-jetpack').cwd(app.getAppPath());
 var Vue = require('vue');
 var $ = window.$ = window.jQuery = require('../../js/jquery-1.12.0.min.js');
