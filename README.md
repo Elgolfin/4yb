@@ -6,7 +6,7 @@
 
 # 4yb
 
-## Developement environment setup
+## Development environment setup
 
 - git clone https://github.com/Elgolfin/4yb.git
 - Install electron-prebuilt globally (npm install -g electron-prebuilt)
@@ -30,11 +30,11 @@ To to:
 Or
 - Run the 4YB exe if you installed from the package
 
-## Running the app
-- npm test
+## Testing the app
+- npm test (Run the unit tests followed by the code coverage)
+- npm run unit (Run the unit tests)
+- npm run unitlive (Run the unit tests in real time)
 
-Or
-- mocha -w
 
 ## Links
 
