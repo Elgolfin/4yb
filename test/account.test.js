@@ -2,7 +2,7 @@
 "use strict";
 var assert = require('chai').assert;
 var Account = require('../js/account.js').Account;
-const Db4yb = require('../js/4yb-database.js').Db4yb;
+let Db4yb = require('../js/4yb-database.js').Db4yb;
 
 let db_4yb;
 let testData = [

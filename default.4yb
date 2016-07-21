@@ -12,5 +12,3 @@
 {"name":"Credit Cards","code":"","type":"CC","parent":"a.d","description":"","active":true,"placeholder":true,"entity":"account","path":"a.d.a","_id":"lVGIFkZY1cZTD0Wh"}
 {"name":"Utilities","code":"","type":"EXP","path":"a.c.a","parent":"a.c","description":"","hidden":"","placeholder":true,"active":true,"entity":"account","_id":"qSeJl7uQeSumIgVv","createdAt":{"$$date":1456366683795},"updatedAt":{"$$date":1456366683795}}
 {"code":"c1","description":"d1","_group":"wTOcwKNaJsZdq1B0","transaction_date":"2016-03-02","posted_date":"2016-03-04","debit":"","credit":"2000","transfer":"a.d.a","note":"","entity":"transaction","_id":"wTOcwKNaJsZdq1B0","createdAt":"2016-03-07T00:59:31.059Z","updatedAt":{"$$date":1457313190664}}
-{"name":"test","code":"","type":"CASH","path":"a.e","parent":"a","description":"","hidden":"","placeholder":"","active":true,"entity":"account","_id":"BHLfFupJ6cZNZtaw","createdAt":{"$$date":1469116749752},"updatedAt":{"$$date":1469116749752}}
-{"$$deleted":true,"_id":"BHLfFupJ6cZNZtaw"}

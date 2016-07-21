@@ -1,9 +1,9 @@
 /* global describe, it, before, after, expect */ 
 "use strict";
-const assert = require('chai').assert;
-const TransactionsManager = require('../js/transactions-manager.js').TransactionsManager;
-const Db4yb = require('../js/4yb-database.js').Db4yb;
-const jetpack = require('fs-jetpack').cwd('./test/');
+let assert = require('chai').assert;
+let TransactionsManager = require('../js/transactions-manager.js').TransactionsManager;
+let Db4yb = require('../js/4yb-database.js').Db4yb;
+let jetpack = require('fs-jetpack').cwd('./test/');
 
 let db_4yb;
 let testData = jetpack.read('./transactions-manager.test.data.json', 'jsonWithDates');
