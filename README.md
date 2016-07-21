@@ -1,3 +1,6 @@
+[![Dependency Status](https://david-dm.org/elgolfin/4yb.svg)](https://david-dm.org/elgolfin/4yb)
+[![devDependency Status](https://david-dm.org/elgolfin/4yb/dev-status.svg)](https://david-dm.org/elgolfin/4yb#info=devDependencies)
+
 # 4yb
 
 ## Developement environment setup
