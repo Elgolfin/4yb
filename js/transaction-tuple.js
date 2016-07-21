@@ -70,9 +70,9 @@ TransactionTuple.prototype.save = function () {
     
     if (!this._id) {
         this.currentTransaction._id = this.db.createNewId();
-        this.twinTransaction._id = this.db.createNewId();
+        this.twinTransaction._id = this.currentTransaction._id;
         while (this.twinTransaction._id == this.currentTransaction._id) {
-            this.twinTransaction._id = db_4yb.createNewId();
+            this.twinTransaction._id = this.db.createNewId();
         }
         this._group = this._id;
     }
@@ -106,7 +106,7 @@ TransactionTuple.prototype.delete = function () {
 }
 
 TransactionTuple.prototype.add = function (callback) {
-    TransactionTuple.prototype.save(callback);
+    this.save(callback);
 }
 
 // linkedTransfer

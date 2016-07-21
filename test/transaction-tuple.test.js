@@ -107,7 +107,7 @@ describe('Transaction Tuple', function() {
             };
             var linkedTransfer = {path: "b.c", type: "CC"};
             var transactionTuple = new TransactionTuple(db_4yb).load(transaction, {transfer: linkedTransfer});
-            transactionTuple.save(function(savedTransaction) {
+            transactionTuple.add(function(savedTransaction) {
                 assert.isString(transactionTuple.currentTransaction._id);
                 assert.match(transactionTuple.currentTransaction._id, /[a-z0-9]{16}/i);
                 assert.isString(transactionTuple.twinTransaction._id);
@@ -169,7 +169,83 @@ describe('Transaction Tuple', function() {
                 assert.strictEqual(transactionTuple.twinTransaction.credit, 0);
                 done();
             });
-        });        
+        });  
+        
+        it('save a third new transaction (BANK -> BANK)', function(done) {
+            var transaction = {
+                code: "c3",
+                description: "d3",
+                note: "n3",
+                transaction_date: new Date(2016,2,28),
+                posted_date: new Date(2016,3,2),
+                recognition_date: null,
+                transfer: {path: "b.c", type: "BANK"},
+                debit: 99.33,
+                credit: 0,
+                city: "Montréal",
+                state: "QC",
+                country: "Canada",
+                zipcode: "A1B 2C3"
+            };
+            var linkedTransfer = {path: "c.a", type: "BANK"};
+            var transactionTuple = new TransactionTuple(db_4yb).load(transaction, {transfer: linkedTransfer});
+            transactionTuple.save(function(savedTransaction) {
+                assert.isString(transactionTuple.currentTransaction._id);
+                assert.match(transactionTuple.currentTransaction._id, /[a-z0-9]{16}/i);
+                assert.isString(transactionTuple.twinTransaction._id);
+                assert.match(transactionTuple.twinTransaction._id, /[a-z0-9]{16}/i);
+                assert.notStrictEqual(transactionTuple.currentTransaction._id, transactionTuple.twinTransaction._id);
+                
+                assert.strictEqual(transactionTuple.currentTransaction.transfer.path, "b.c");
+                assert.strictEqual(transactionTuple.twinTransaction.transfer.path, "c.a");
+                assert.strictEqual(savedTransaction.currentTransaction.transfer, "b.c");
+                assert.strictEqual(savedTransaction.twinTransaction.transfer, "c.a");
+                
+                assert.strictEqual(transactionTuple.currentTransaction.debit, 99.33);
+                assert.strictEqual(transactionTuple.currentTransaction.credit, 0);
+                assert.strictEqual(transactionTuple.twinTransaction.debit, 0);
+                assert.strictEqual(transactionTuple.twinTransaction.credit, 99.33);
+                done();
+            });
+        }); 
+        
+        it('save a fourth new transaction (ASSET -> ASSET)', function(done) {
+            var transaction = {
+                code: "c4",
+                description: "d4",
+                note: "n4",
+                transaction_date: new Date(2016,2,28),
+                posted_date: new Date(2016,3,2),
+                recognition_date: null,
+                transfer: {path: "b.c", type: "ASSET"},
+                debit: 99.44,
+                credit: 0,
+                city: "Montréal",
+                state: "QC",
+                country: "Canada",
+                zipcode: "A1B 2C3"
+            };
+            var linkedTransfer = {path: "c.a", type: "ASSET"};
+            var transactionTuple = new TransactionTuple(db_4yb).load(transaction, {transfer: linkedTransfer});
+            transactionTuple.save(function(savedTransaction) {
+                assert.isString(transactionTuple.currentTransaction._id);
+                assert.match(transactionTuple.currentTransaction._id, /[a-z0-9]{16}/i);
+                assert.isString(transactionTuple.twinTransaction._id);
+                assert.match(transactionTuple.twinTransaction._id, /[a-z0-9]{16}/i);
+                assert.notStrictEqual(transactionTuple.currentTransaction._id, transactionTuple.twinTransaction._id);
+                
+                assert.strictEqual(transactionTuple.currentTransaction.transfer.path, "b.c");
+                assert.strictEqual(transactionTuple.twinTransaction.transfer.path, "c.a");
+                assert.strictEqual(savedTransaction.currentTransaction.transfer, "b.c");
+                assert.strictEqual(savedTransaction.twinTransaction.transfer, "c.a");
+                
+                assert.strictEqual(transactionTuple.currentTransaction.debit, 99.44);
+                assert.strictEqual(transactionTuple.currentTransaction.credit, 0);
+                assert.strictEqual(transactionTuple.twinTransaction.debit, 0);
+                assert.strictEqual(transactionTuple.twinTransaction.credit, 99.44);
+                done();
+            });
+        });          
         
         /*
         it('save a second new account', function(done) {
