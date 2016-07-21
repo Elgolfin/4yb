@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/Elgolfin/4yb/tree/master.svg?style=svg)](https://circleci.com/gh/Elgolfin/4yb/tree/master)
+[![CircleCI](https://circleci.com/gh/Elgolfin/4yb/tree/master.svg?style=shield)](https://circleci.com/gh/Elgolfin/4yb/tree/master)
 [![Dependency Status](https://david-dm.org/elgolfin/4yb.svg)](https://david-dm.org/elgolfin/4yb)
 [![devDependency Status](https://david-dm.org/elgolfin/4yb/dev-status.svg)](https://david-dm.org/elgolfin/4yb#info=devDependencies)
 
