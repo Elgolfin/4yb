@@ -1,16 +1,15 @@
-[![CircleCI](https://circleci.com/gh/Elgolfin/electron-vue-boilerplate/tree/master.svg?style=shield)](https://circleci.com/gh/Elgolfin/electron-vue-boilerplate/tree/master)
-[![codecov](https://codecov.io/gh/Elgolfin/electron-vue-boilerplate/branch/master/graph/badge.svg)](https://codecov.io/gh/Elgolfin/electron-vue-boilerplate)
+[![CircleCI](https://circleci.com/gh/Elgolfin/4yb/tree/master.svg?style=shield)](https://circleci.com/gh/Elgolfin/4yb/tree/master)
+[![codecov](https://codecov.io/gh/Elgolfin/4yb/branch/master/graph/badge.svg)](https://codecov.io/gh/Elgolfin/4yb)
 
-[![Dependency Status](https://david-dm.org/elgolfin/electron-vue-boilerplate.svg)](https://david-dm.org/elgolfin/electron-vue-boilerplate)
-[![devDependency Status](https://david-dm.org/elgolfin/electron-vue-boilerplate/dev-status.svg)](https://david-dm.org/elgolfin/electron-vue-boilerplate#info=devDependencies)
+[![Dependency Status](https://david-dm.org/elgolfin/4yb.svg)](https://david-dm.org/elgolfin/4yb)
+[![devDependency Status](https://david-dm.org/elgolfin/4yb/dev-status.svg)](https://david-dm.org/elgolfin/4yb#info=devDependencies)
 
-# electron-vue-boilerplate
+# For your budget (4yb)
 
-Based on https://github.com/bradstewart/electron-boilerplate-vue/
 
 ## Development environment setup
 
-- git clone https://github.com/Elgolfin/electron-vue-boilerplate.git
+- git clone https://github.com/Elgolfin/4yb.git
 - Install electron-prebuilt globally (npm install -g electron-prebuilt; Visual Studio must be install; Python 2.x also)
 - npm install
 - npm start
@@ -34,5 +33,8 @@ To to:
 - npm run unitlive (Run the unit tests in real time)
 
 
+
 ## Links
+
+https://www.iconfinder.com/iconsets/finance-10
 
