@@ -15,7 +15,7 @@ Based on https://github.com/bradstewart/electron-boilerplate-vue/
 - npm install
 - npm start
 
-## Package (TO be reviewed)
+## Package (To be reviewed)
 
 - npm install electron-packager -g
 - electron-packager . 4YB --platform=win32 --arch=x64 --version=0.36.0
