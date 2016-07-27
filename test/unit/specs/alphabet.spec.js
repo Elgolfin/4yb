@@ -54,14 +54,26 @@ describe('Alphabet', function () {
   })
   describe('Method buildFlatList:', function () {
     it(' Returns empty when input is bad', function () {
-      var ret = [{path: 'a'},{path: 'a.a'}]
+      var ret = [{path: 'a'}, {path: 'a.a'}]
       var assert = []
       alphabet.buildFlatList('a', ret).should.eql(assert)
     })
-    it(' Returns empty when input is good', function () {
+    it(' Returns expected flat list when input is good', function () {
       var ret = [{path: 'a.a', parent: 'a'}, {path: 'a.a.a', parent: 'a.a'}]
-      var assert = [{account: {parent: 'a', path: 'a.a'}, indent: ''}, {account: {parent: 'a.a', path:'a.a.a'}, indent: '&dash;&dash;'}]
+      var assert = [{account: {parent: 'a', path: 'a.a'}, indent: ''}, {account: {parent: 'a.a', path: 'a.a.a'}, indent: '&dash;&dash;'}]
       alphabet.buildFlatList('a', ret).should.eql(assert)
+    })
+  })
+  describe('Method buildTreeList:', function () {
+    it(' Returns empty when input is bad', function () {
+      var ret = [{path: 'a'}, {path: 'a.a'}]
+      var assert = []
+      alphabet.buildTreeList('a', ret).should.eql(assert)
+    })
+    it(' Returns expected tree list when input is good', function () {
+      var ret = [{path: 'a.a', parent: 'a'}, {path: 'a.a.a', parent: 'a.a'}]
+      var assert = [{account: {parent: 'a', path: 'a.a'}, children: [{account: {path: 'a.a.a', parent: 'a.a'}, children: []}]}]
+      alphabet.buildTreeList('a', ret).should.eql(assert)
     })
   })
 })
