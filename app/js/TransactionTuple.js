@@ -59,13 +59,7 @@ let TransactionTuple = exports.TransactionTuple = function (db) {
   return this
 }
 
-TransactionTuple.prototype.save = function () {
-  let callback = function () { }
-  let numArgs = arguments.length
-  if (numArgs === 1) {
-    callback = arguments[0]
-  }
-
+TransactionTuple.prototype.save = function (callback) {
   if (!this._id) {
     this.currentTransaction._id = this.db.createNewId()
     this.twinTransaction._id = this.currentTransaction._id
@@ -99,9 +93,10 @@ TransactionTuple.prototype.save = function () {
   saveTransactionTuple.call(this, callback)
 }
 
-TransactionTuple.prototype.delete = function () {
+// TODO implement DELETE
+/* TransactionTuple.prototype.delete = function () {
 
-}
+} */
 
 TransactionTuple.prototype.add = function (callback) {
   this.save(callback)
@@ -196,9 +191,11 @@ function saveTransactionTuple (callback) {
   const transactionTupleToBeSaved = this.JSONify()
   const db = this.db
   db.update({ _id: transactionTupleToBeSaved.currentTransaction._id }, transactionTupleToBeSaved.currentTransaction, { upsert: true }, function (err, numReplaced) {
-    if (err) { throw err }
+    // TODO implement err
+    if (err) { }
     db.update({ _id: transactionTupleToBeSaved.twinTransaction._id }, transactionTupleToBeSaved.twinTransaction, { upsert: true }, function (err, numReplaced) {
-      if (err) { throw err }
+      // TODO implement err
+      if (err) { }
       callback(transactionTupleToBeSaved)
     })
   })
