@@ -7,7 +7,7 @@ module.exports = {
 
   'selenium': {
     'start_process': true,
-    'server_path': 'node_modules/selenium-server/lib/runner/selenium-server-standalone-2.52.0.jar',
+    'server_path': 'node_modules/selenium-server/lib/runner/selenium-server-standalone-3.0.1.jar',
     'host': '127.0.0.1',
     'port': 4444,
     'cli_args': {
@@ -28,7 +28,7 @@ module.exports = {
         'javascriptEnabled': true,
         'acceptSslCerts': true,
         chromeOptions: {
-          binary: require('electron-prebuilt') // Path to your Electron binary.
+          binary: require('electron') // Path to your Electron binary.
         }
       }
     }
