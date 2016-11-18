@@ -10,8 +10,8 @@ var config = require('../config')
 
 function getElectronVersion () {
   var v = config.release.electronVersion ||
-    (devManifest.devDependencies || {})['electron-prebuilt'] ||
-    (devManifest.dependencies || {})['electron-prebuilt']
+    (devManifest.devDependencies || {})['electron'] ||
+    (devManifest.dependencies || {})['electron']
 
   if (v) {
     return v.replace(/^\D+/, '')

@@ -10,7 +10,7 @@
 ## Development environment setup
 
 - git clone https://github.com/Elgolfin/4yb.git
-- Install electron-prebuilt globally (npm install -g electron-prebuilt; Visual Studio must be install; Python 2.x also)
+- Install electron globally (npm install -g electron; Visual Studio must be install; Python 2.x also)
 - npm install
 - npm start
 

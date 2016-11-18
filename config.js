@@ -26,7 +26,7 @@ module.exports = {
   },
   release: {
     // The Electron version to use for packaged releases. If blank, it defaults
-    // to the version of electron-prebuilt in your development package.json.
+    // to the version of electron in your development package.json.
     //
     // electronVersion: '0.37.2',
 
