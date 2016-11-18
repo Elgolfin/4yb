@@ -1,8 +1,8 @@
-/* global describe, it, beforeAll, afterAll, expect */
+/* global describe, it, before, after, expect */
 'use strict'
 var assert = require('chai').assert
-import { TransactionTuple } from 'app/js/TransactionTuple'
-import { Db4yb } from 'app/js/Db4yb'
+import { TransactionTuple } from 'src/lib/TransactionTuple'
+import { Db4yb } from 'src/lib/Db4yb'
 
 let db4yb
 let testData = [
@@ -45,7 +45,7 @@ let testData = [
 ]
 
 describe('Transaction Tuple', function () {
-  beforeAll(function (done) {
+  before(function (done) {
     db4yb = new Db4yb().load().Datastore // db in-memory
     // db4yb = new Db4yb().load('test.db.' + (new Date).getTime() + '.json').Datastore; // db file
     db4yb.insert(testData, function (err, newDoc) {
@@ -54,7 +54,7 @@ describe('Transaction Tuple', function () {
     })
   })
 
-  afterAll(function (done) {
+  after(function (done) {
     db4yb.loadDatabase(function () {
       done()
     })

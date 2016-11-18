@@ -1,4 +1,4 @@
-import { Alphabet } from 'app/js/Alphabet'
+import { Alphabet } from 'src/lib/Alphabet'
 
 describe('Alphabet', function () {
   describe('Method getNextEntry:', function () {

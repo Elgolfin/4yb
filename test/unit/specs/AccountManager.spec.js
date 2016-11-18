@@ -1,15 +1,15 @@
-/* global describe, it, beforeAll, afterAll, expect */
+/* global describe, it, before, after, expect */
 'use strict'
 var assert = require('chai').assert
-import { AccountManager } from 'app/js/AccountManager'
-import { Db4yb } from 'app/js/Db4yb'
+import { AccountManager } from 'src/lib/AccountManager'
+import { Db4yb } from 'src/lib/Db4yb'
 const jetpack = require('fs-jetpack').cwd('test/unit/specs/testdata')
 
 let db4yb
 let testData = jetpack.read('./AccountManager.test.data.json', 'jsonWithDates')
 
 describe('Account Manager', function () {
-  beforeAll(function (done) {
+  before(function (done) {
     db4yb = new Db4yb().load().Datastore // db in-memory
     // db4yb = new Db4yb().load('test.db.' + (new Date).getTime() + '.json').Datastore; // db file
     db4yb.insert(testData, function (err, newDoc) {
@@ -18,7 +18,7 @@ describe('Account Manager', function () {
     })
   })
 
-  afterAll(function (done) {
+  after(function (done) {
     db4yb.loadDatabase(function () {
       done()
     })
